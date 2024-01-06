@@ -8,12 +8,12 @@ package View;
  *
  * @author asus
  */
-public class Form_NhanVien extends javax.swing.JPanel {
+public class Form_SanPham extends javax.swing.JPanel {
 
     /**
      * Creates new form Form_BanHang
      */
-    public Form_NhanVien() {
+    public Form_SanPham() {
         initComponents();
     }
 
