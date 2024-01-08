@@ -50,7 +50,7 @@ public class Form_BanHang extends javax.swing.JPanel {
         jPanel_BanHang.setBackground(new java.awt.Color(255, 255, 255));
         jPanel_BanHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jPanel_TableHD.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel_TableHD.setBackground(new java.awt.Color(255, 255, 204));
         jPanel_TableHD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 102));
@@ -112,7 +112,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
-        jPanel_GioHang.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel_GioHang.setBackground(new java.awt.Color(255, 255, 204));
         jPanel_GioHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setBackground(new java.awt.Color(255, 153, 102));
@@ -174,7 +174,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                         .addGap(40, 40, 40))))
         );
 
-        jPanel_SanPham.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel_SanPham.setBackground(new java.awt.Color(255, 255, 204));
         jPanel_SanPham.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setBackground(new java.awt.Color(255, 153, 102));
@@ -254,7 +254,7 @@ public class Form_BanHang extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        jPanel_HoaDon.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel_HoaDon.setBackground(new java.awt.Color(255, 255, 204));
         jPanel_HoaDon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel_HoaDonLayout = new javax.swing.GroupLayout(jPanel_HoaDon);

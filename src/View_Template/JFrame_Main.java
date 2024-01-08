@@ -8,6 +8,7 @@ package View_Template;
 import View.Form_BanHang;
 
 import View.Form_NhanVien;
+import View.Form_QLHoaDon;
 import event.EventMenuSelected;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -40,7 +41,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index == 8){
                        
                    }else if(index == 10){
-                       
+                       setForm(new Form_QLHoaDon());
                    }else if(index == 12){
                        
                    }else if(index == 14){
