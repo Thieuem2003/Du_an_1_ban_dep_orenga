@@ -9,6 +9,7 @@ import View.Form_BanHang;
 
 import View.Form_NhanVien;
 import View.Form_QLHoaDon;
+import View.Form_SanPham;
 import event.EventMenuSelected;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -35,7 +36,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index ==2){
                        setForm(new Form_BanHang());
                    }else if(index == 4){
-                       
+                       setForm(new Form_SanPham());
                    }else if(index == 6){
                        setForm(new Form_NhanVien());
                    }else if(index == 8){
