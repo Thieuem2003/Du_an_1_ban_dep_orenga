@@ -517,20 +517,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox8" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox9" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox10" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
+                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox8" min="-2" pref="327" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox9" min="-2" pref="295" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                           <Component id="jButton7" min="-2" pref="94" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
@@ -543,15 +538,13 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jComboBox9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jComboBox8" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox9" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -572,11 +565,6 @@
                     <Property name="text" type="java.lang.String" value="Gi&#xe1; Ti&#x1ec1;n"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel16">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Ch&#x1ea5;t Li&#x1ec7;u"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBox8">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -588,16 +576,6 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBox9">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox10">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
@@ -783,7 +761,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="319" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButton22" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton23" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -1118,8 +1096,8 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Qu&#x1ea3;n L&#xfd; Lo&#x1ea1;i &#x110;&#x1ebf;">
-                        <Property name="tabTitle" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Lo&#x1ea1;i &#x110;&#x1ebf;"/>
+                      <JTabbedPaneConstraints tabName="Qu&#x1ea3;n L&#xfd; &#x110;&#x1ebf;">
+                        <Property name="tabTitle" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; &#x110;&#x1ebf;"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -1146,7 +1124,7 @@
                                       <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTextField12" min="-2" pref="202" max="-2" attributes="0"/>
-                                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                                      <EmptySpace pref="116" max="32767" attributes="0"/>
                                       <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jRadioButton9" min="-2" max="-2" attributes="0"/>
@@ -1207,14 +1185,14 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel26">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="M&#xe3; Lo&#x1ea1;i &#x110;&#x1ebf; "/>
+                        <Property name="text" type="java.lang.String" value="M&#xe3; &#x110;&#x1ebf; "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextField11">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel27">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="T&#xea;n Lo&#x1ea1;i &#x110;&#x1ebf;"/>
+                        <Property name="text" type="java.lang.String" value="&#x110;&#x1ed9; Cao"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextField12">
@@ -1273,8 +1251,8 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="3" rowCount="0">
-                                <Column editable="true" title="M&#xe3; Lo&#x1ea1;i &#x110;&#x1ebf;" type="java.lang.Object"/>
-                                <Column editable="true" title="T&#xea;n Lo&#x1ea1;i &#x110;&#x1ebf;" type="java.lang.Object"/>
+                                <Column editable="true" title="M&#xe3; &#x110;&#x1ebf;" type="java.lang.Object"/>
+                                <Column editable="true" title="&#x110;&#x1ed9; Cao" type="java.lang.Object"/>
                                 <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
                               </Table>
                             </Property>
