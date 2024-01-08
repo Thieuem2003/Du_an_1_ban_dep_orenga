@@ -183,7 +183,7 @@ public class Form_SanPham extends javax.swing.JPanel {
 
         jLabel6.setText("Màu Sắc");
 
-        jLabel7.setText("Loại Đế");
+        jLabel7.setText("Đế");
 
         jLabel8.setText("Số Lượng");
 

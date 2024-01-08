@@ -309,7 +309,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i &#x110;&#x1ebf;"/>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBox1">
