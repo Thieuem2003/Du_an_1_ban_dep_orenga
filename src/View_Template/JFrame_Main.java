@@ -6,10 +6,13 @@ package View_Template;
 
 
 import View.Form_BanHang;
+import View.Form_KhachHang;
 
 import View.Form_NhanVien;
 import View.Form_QLHoaDon;
 import View.Form_SanPham;
+import View.Form_ThongKe;
+import View.Form_TrangChu;
 import event.EventMenuSelected;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -28,11 +31,13 @@ public class JFrame_Main extends javax.swing.JFrame {
         setBackground(new Color(0,0,0));
         jPanel_Menu1.initMoving(JFrame_Main.this);
         
+        setForm(new Form_TrangChu());
+        
         jPanel_Menu1.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
                    if(index == 0){
-                       
+                       setForm(new Form_TrangChu());
                    }else if(index ==2){
                        setForm(new Form_BanHang());
                    }else if(index == 4){
@@ -40,11 +45,11 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index == 6){
                        setForm(new Form_NhanVien());
                    }else if(index == 8){
-                       
+                       setForm( new Form_KhachHang());
                    }else if(index == 10){
                        setForm(new Form_QLHoaDon());
                    }else if(index == 12){
-                       
+                       setForm(new Form_ThongKe());
                    }else if(index == 14){
                        
                    }else if(index == 16){
@@ -79,6 +84,10 @@ public class JFrame_Main extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel_Border1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel1.setText("                                                                                      WELLCOME TO ORANGE SHOP");
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
