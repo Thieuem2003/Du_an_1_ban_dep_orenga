@@ -80,8 +80,6 @@ public class JFrame_Main extends javax.swing.JFrame {
 
         jPanel_Border1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Day la thanh menuvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
-
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel_Border1Layout = new javax.swing.GroupLayout(jPanel_Border1);
@@ -100,8 +98,7 @@ public class JFrame_Main extends javax.swing.JFrame {
             .addGroup(jPanel_Border1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel_Menu1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 

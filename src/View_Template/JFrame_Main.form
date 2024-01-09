@@ -69,9 +69,6 @@
         <Component class="View_Template.JPanel_Menu" name="jPanel_Menu1">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Day la thanh menuvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"/>
-          </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="mainPanel">
 
