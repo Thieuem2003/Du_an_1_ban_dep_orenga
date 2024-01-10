@@ -10,7 +10,6 @@ import View.Form_KhachHang;
 
 import View.Form_NhanVien;
 import View.Form_QLHoaDon;
-import View.Form_SanPham;
 import View.Form_ThongKe;
 import View.Form_TrangChu;
 import event.EventMenuSelected;
@@ -41,7 +40,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index ==2){
                        setForm(new Form_BanHang());
                    }else if(index == 4){
-                       setForm(new Form_SanPham());
+                   //    setForm(new Form_SanPham());
                    }else if(index == 6){
                        setForm(new Form_NhanVien());
                    }else if(index == 8){
