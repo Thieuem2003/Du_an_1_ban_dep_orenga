@@ -12,7 +12,9 @@ public class ChiTietDep {
     
     private Integer id;
     
-    private Integer idLoaiDep;
+    private Integer idDanhMuc;
+    
+    private Integer idSanPham;
     
     private Integer idSize;
     
@@ -21,6 +23,8 @@ public class ChiTietDep {
     private Integer idChatLieu;
     
     private Integer idNgaySX;
+    
+    private Integer idDe;
     
     private Integer soLuong;
     
@@ -35,14 +39,15 @@ public class ChiTietDep {
     public ChiTietDep() {
     }
 
-    
-    public ChiTietDep(Integer id, Integer idLoaiDep, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNgaySX, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
+    public ChiTietDep(Integer id, Integer idDanhMuc, Integer idSanPham, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNgaySX, Integer idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
         this.id = id;
-        this.idLoaiDep = idLoaiDep;
+        this.idDanhMuc = idDanhMuc;
+        this.idSanPham = idSanPham;
         this.idSize = idSize;
         this.idMauSac = idMauSac;
         this.idChatLieu = idChatLieu;
         this.idNgaySX = idNgaySX;
+        this.idDe = idDe;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
@@ -58,12 +63,20 @@ public class ChiTietDep {
         this.id = id;
     }
 
-    public Integer getIdLoaiDep() {
-        return idLoaiDep;
+    public Integer getIdDanhMuc() {
+        return idDanhMuc;
     }
 
-    public void setIdLoaiDep(Integer idLoaiDep) {
-        this.idLoaiDep = idLoaiDep;
+    public void setIdDanhMuc(Integer idDanhMuc) {
+        this.idDanhMuc = idDanhMuc;
+    }
+
+    public Integer getIdSanPham() {
+        return idSanPham;
+    }
+
+    public void setIdSanPham(Integer idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public Integer getIdSize() {
@@ -96,6 +109,14 @@ public class ChiTietDep {
 
     public void setIdNgaySX(Integer idNgaySX) {
         this.idNgaySX = idNgaySX;
+    }
+
+    public Integer getIdDe() {
+        return idDe;
+    }
+
+    public void setIdDe(Integer idDe) {
+        this.idDe = idDe;
     }
 
     public Integer getSoLuong() {
@@ -137,6 +158,6 @@ public class ChiTietDep {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
-    
+
     
 }

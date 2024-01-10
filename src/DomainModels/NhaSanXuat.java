@@ -8,9 +8,9 @@ package DomainModels;
  *
  * @author ADMIN
  */
-public class LoaiDep {
+public class NhaSanXuat {
     
-    private Integer idLoaiDep;
+    private int id;
     
     private String ma;
     
@@ -18,15 +18,29 @@ public class LoaiDep {
     
     private Integer trangThai;
 
-    public LoaiDep() {
+    public NhaSanXuat() {
     }
 
-    public Integer getIdLoaiDep() {
-        return idLoaiDep;
+    public NhaSanXuat(int id, String ma, String ten) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+    }
+    
+
+    public NhaSanXuat(int id, String ma, String ten, Integer trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.trangThai = trangThai;
     }
 
-    public void setIdLoaiDep(Integer idLoaiDep) {
-        this.idLoaiDep = idLoaiDep;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMa() {
@@ -52,11 +66,6 @@ public class LoaiDep {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
-
-    public LoaiDep(Integer idLoaiDep, String ma, String ten, Integer trangThai) {
-        this.idLoaiDep = idLoaiDep;
-        this.ma = ma;
-        this.ten = ten;
-        this.trangThai = trangThai;
-    }
+    
+    
 }

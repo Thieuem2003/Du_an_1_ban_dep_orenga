@@ -8,9 +8,9 @@ package DomainModels;
  *
  * @author ADMIN
  */
-public class ChatLieu {
+public class DanhMuc {
     
-    private Integer id;
+    private Integer idDanhMuc;
     
     private String ma;
     
@@ -18,29 +18,15 @@ public class ChatLieu {
     
     private Integer trangThai;
 
-    public ChatLieu() {
+    public DanhMuc() {
     }
 
-    public ChatLieu(Integer id, String ma, String ten) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-    }
-    
-    
-    public ChatLieu(Integer id, String ma, String ten, Integer trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.trangThai = trangThai;
+    public Integer getIdLoaiDep() {
+        return idDanhMuc;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdLoaiDep(Integer idDanhMuc) {
+        this.idDanhMuc = idDanhMuc;
     }
 
     public String getMa() {
@@ -66,6 +52,11 @@ public class ChatLieu {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+    public DanhMuc(Integer idDanhMuc, String ma, String ten, Integer trangThai) {
+        this.idDanhMuc = idDanhMuc;
+        this.ma = ma;
+        this.ten = ten;
+        this.trangThai = trangThai;
+    }
 }
