@@ -20,8 +20,14 @@ public class ChatLieu {
 
     public ChatLieu() {
     }
-    
 
+    public ChatLieu(Integer id, String ma, String ten) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+    }
+    
+    
     public ChatLieu(Integer id, String ma, String ten, Integer trangThai) {
         this.id = id;
         this.ma = ma;

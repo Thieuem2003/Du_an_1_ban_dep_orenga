@@ -20,6 +20,12 @@ public class MauSac {
 
     public MauSac() {
     }
+
+    public MauSac(Integer id, String ma, String mauSac) {
+        this.id = id;
+        this.ma = ma;
+        this.mauSac = mauSac;
+    }
     
 
     public MauSac(Integer id, String ma, String mauSac, Integer trangThai) {

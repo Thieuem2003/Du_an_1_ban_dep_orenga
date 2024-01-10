@@ -8,9 +8,9 @@ package DomainModels;
  *
  * @author ADMIN
  */
-public class NgaySanXuat {
+public class De {
     
-    private int id;
+    private Integer idDe;
     
     private String ma;
     
@@ -18,23 +18,28 @@ public class NgaySanXuat {
     
     private Integer trangThai;
 
-    public NgaySanXuat() {
+    public De() {
     }
-    
 
-    public NgaySanXuat(int id, String ma, String ten, Integer trangThai) {
-        this.id = id;
+    public De(Integer idDe, String ma, String ten) {
+        this.idDe = idDe;
+        this.ma = ma;
+        this.ten = ten;
+    }
+
+    public De(Integer idDe, String ma, String ten, Integer trangThai) {
+        this.idDe = idDe;
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdDe() {
+        return idDe;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdDe(Integer idDe) {
+        this.idDe = idDe;
     }
 
     public String getMa() {
