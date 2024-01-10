@@ -61,7 +61,7 @@ public class From_QuenMatKhau extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Email ");
+        jLabel2.setText("UserName :");
 
         jButton1.setBackground(new java.awt.Color(255, 204, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -74,10 +74,10 @@ public class From_QuenMatKhau extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Mật khẩu");
+        jLabel4.setText("PassWord :");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Nhập lại mật khẩu");
+        jLabel5.setText("RePassWord :");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Captcha code");

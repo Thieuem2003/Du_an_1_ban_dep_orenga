@@ -100,7 +100,7 @@ public class JPanel_Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel_logo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         listMenu1 = new DomainModels.ListMenu<>();
 
         setOpaque(false);
@@ -109,23 +109,19 @@ public class JPanel_Menu extends javax.swing.JPanel {
         jPanel_logo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel_logo.setOpaque(false);
 
-        jLabel1.setText("CHU VAN TRAM");
+        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
+        jLabel2.setText("    ORANGE");
 
         javax.swing.GroupLayout jPanel_logoLayout = new javax.swing.GroupLayout(jPanel_logo);
         jPanel_logo.setLayout(jPanel_logoLayout);
         jPanel_logoLayout.setHorizontalGroup(
             jPanel_logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_logoLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
         );
         jPanel_logoLayout.setVerticalGroup(
             jPanel_logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_logoLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -141,13 +137,13 @@ public class JPanel_Menu extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel_logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel_logo;
     private DomainModels.ListMenu<String> listMenu1;
     // End of variables declaration//GEN-END:variables

@@ -6,13 +6,17 @@ package View_Template;
 
 
 import View.Form_BanHang;
+import View.Form_KhachHang;
 
 import View.Form_NhanVien;
 import View.Form_QLHoaDon;
 import View.Form_SanPham;
+import View.Form_ThongKe;
+import View.Form_TrangChu;
 import event.EventMenuSelected;
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -27,12 +31,16 @@ public class JFrame_Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0,0,0));
         jPanel_Menu1.initMoving(JFrame_Main.this);
+        // Đặt chế độ đóng cửa sổ
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    
+        setForm(new Form_TrangChu());
         
         jPanel_Menu1.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
                    if(index == 0){
-                       
+                       setForm(new Form_TrangChu());
                    }else if(index ==2){
                        setForm(new Form_BanHang());
                    }else if(index == 4){
@@ -40,11 +48,11 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index == 6){
                        setForm(new Form_NhanVien());
                    }else if(index == 8){
-                       
+                       setForm( new Form_KhachHang());
                    }else if(index == 10){
                        setForm(new Form_QLHoaDon());
                    }else if(index == 12){
-                       
+                       setForm(new Form_ThongKe());
                    }else if(index == 14){
                        
                    }else if(index == 16){
@@ -80,7 +88,9 @@ public class JFrame_Main extends javax.swing.JFrame {
 
         jPanel_Border1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Day la thanh menuvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel1.setText("                                                                                      WELLCOME TO ORANGE SHOP");
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
@@ -100,8 +110,7 @@ public class JFrame_Main extends javax.swing.JFrame {
             .addGroup(jPanel_Border1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel_Menu1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
