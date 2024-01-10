@@ -16,6 +16,7 @@ import View.Form_TrangChu;
 import event.EventMenuSelected;
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -30,7 +31,9 @@ public class JFrame_Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0,0,0));
         jPanel_Menu1.initMoving(JFrame_Main.this);
-        
+        // Đặt chế độ đóng cửa sổ
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    
         setForm(new Form_TrangChu());
         
         jPanel_Menu1.addEventMenuSelected(new EventMenuSelected(){

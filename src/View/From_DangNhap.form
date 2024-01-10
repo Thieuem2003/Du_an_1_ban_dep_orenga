@@ -32,7 +32,7 @@
                   <Component id="jLabel3" min="-2" pref="72" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="txtPassDN" alignment="0" pref="247" max="32767" attributes="0"/>
-                      <Component id="txtEmailDN" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtUserName" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel4" min="-2" pref="121" max="-2" attributes="0"/>
@@ -55,7 +55,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtEmailDN" min="-2" max="-2" attributes="0"/>
+              <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -120,7 +120,7 @@
         <Property name="text" type="java.lang.String" value="PassWord :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmailDN">
+    <Component class="javax.swing.JTextField" name="txtUserName">
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtPassDN">
     </Component>
@@ -137,6 +137,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng nh&#x1ead;p"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDangNhapActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
