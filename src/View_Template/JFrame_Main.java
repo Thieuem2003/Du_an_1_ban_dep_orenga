@@ -18,10 +18,7 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-/**
- *
- * @author asus
- */
+
 public class JFrame_Main extends javax.swing.JFrame {
 
     /**
