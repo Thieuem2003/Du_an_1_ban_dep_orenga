@@ -4,8 +4,14 @@
  */
 package View;
 
+import DomainModels.ChiTietDep;
+import DomainModels.SanPham;
+import Interface.ChiTietSanPhamImpl;
+import Service.ChiTietSanPhamService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +22,41 @@ public class Form_ChiTiet extends javax.swing.JFrame {
     /**
      * Creates new form Form_ChiTiet
      */
+    ChiTietSanPhamImpl chiTietSanPhamImpl = new ChiTietSanPhamService();
+    List<ChiTietDep> chiTietDeps = chiTietSanPhamImpl.getList();
+    DefaultTableModel model;
+    
     public Form_ChiTiet() {
         initComponents();
         setLocationRelativeTo(null);
+        fillTableSanPham(chiTietDeps);
     }
 
+    public void fillTableSanPham(List<ChiTietDep> listChiTietDeps){
+        if (listChiTietDeps.isEmpty()) {
+            System.out.println("List San Pham Rong");
+        } else {
+            model = (DefaultTableModel) tblDanhSach.getModel();
+            model.setRowCount(0);
+            
+            for (ChiTietDep sp : listChiTietDeps) {
+                model.addRow(new Object[]{
+                    sp.getIdDanhMuc(),
+                    sp.getIdSanPham(),
+                    sp.getIdChatLieu(),
+                    sp.getIdMauSac(),
+                    sp.getIdDe(),
+                    sp.getIdNgaySX(),
+                    sp.getIdSize(),
+                    sp.getSoLuong(),
+                    sp.getGiaNhap(),
+                    sp.getGiaBan(),
+                    sp.getMoTa(),
+                    sp.getTrangThai()
+                });
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

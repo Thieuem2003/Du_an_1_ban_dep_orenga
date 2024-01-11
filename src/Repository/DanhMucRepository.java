@@ -4,7 +4,7 @@
  */
 package Repository;
 
-import DomainModels.ChatLieu;
+import DomainModels.DanhMuc;
 import Utilities.DBConnection;
 import java.util.ArrayList;
 import java.sql.*;
@@ -13,28 +13,27 @@ import java.sql.*;
  *
  * @author ADMIN
  */
-public class ChatLieuRepository {
+public class DanhMucRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<ChatLieu> getList(){
-        ArrayList<ChatLieu> chatLieus = new ArrayList<>();
-        String sql = "select * from CHATLIEU";
-        try (Connection con = dBConnection.getConnection();
+    public ArrayList<DanhMuc> getList(){
+        ArrayList<DanhMuc> danhMucs = new ArrayList<>();
+        String sql = "select * from DANHMUC";
+        try (Connection con = DBConnection.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
-                ChatLieu cl = new ChatLieu();
-                cl.setId(rs.getInt("Id"));
-                cl.setMa(rs.getString("Ma"));
-                cl.setTen(rs.getString("Ten"));
-                cl.setTrangThai(rs.getInt("TrangThai"));
-                chatLieus.add(cl);
+                DanhMuc danhMuc = new DanhMuc();
+                danhMuc.setIdDanhMuc(rs.getInt("Id"));
+                danhMuc.setMa(rs.getString("Ma"));
+                danhMuc.setTen(rs.getString("Ten"));
+                danhMuc.setTrangThai(rs.getInt("TrangThai"));
+                danhMucs.add(danhMuc);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return chatLieus;
+        return danhMucs;
     }
-    
 }

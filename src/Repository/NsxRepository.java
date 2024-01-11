@@ -4,7 +4,7 @@
  */
 package Repository;
 
-import DomainModels.ChatLieu;
+import DomainModels.NhaSanXuat;
 import Utilities.DBConnection;
 import java.util.ArrayList;
 import java.sql.*;
@@ -13,28 +13,27 @@ import java.sql.*;
  *
  * @author ADMIN
  */
-public class ChatLieuRepository {
+public class NsxRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<ChatLieu> getList(){
-        ArrayList<ChatLieu> chatLieus = new ArrayList<>();
-        String sql = "select * from CHATLIEU";
+    public ArrayList<NhaSanXuat> getList(){
+        ArrayList<NhaSanXuat> nhaSanXuats = new ArrayList<>();
+        String sql = "select * from NSX";
         try (Connection con = dBConnection.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
-                ChatLieu cl = new ChatLieu();
-                cl.setId(rs.getInt("Id"));
-                cl.setMa(rs.getString("Ma"));
-                cl.setTen(rs.getString("Ten"));
-                cl.setTrangThai(rs.getInt("TrangThai"));
-                chatLieus.add(cl);
+                NhaSanXuat nsx = new NhaSanXuat();
+                nsx.setId(rs.getInt("Id"));
+                nsx.setMa(rs.getString("Ma"));
+                nsx.setTen(rs.getString("Ten"));
+                nsx.setTrangThai(rs.getInt("TrangThai"));
+                nhaSanXuats.add(nsx);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return chatLieus;
+        return nhaSanXuats;
     }
-    
 }

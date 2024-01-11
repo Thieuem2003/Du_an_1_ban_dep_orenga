@@ -21,11 +21,11 @@ public class DanhMuc {
     public DanhMuc() {
     }
 
-    public Integer getIdLoaiDep() {
+    public Integer getIdDanhMuc() {
         return idDanhMuc;
     }
 
-    public void setIdLoaiDep(Integer idDanhMuc) {
+    public void setIdDanhMuc(Integer idDanhMuc) {
         this.idDanhMuc = idDanhMuc;
     }
 

@@ -4,37 +4,35 @@
  */
 package Repository;
 
-import DomainModels.ChatLieu;
+import DomainModels.SanPham;
 import Utilities.DBConnection;
 import java.util.ArrayList;
 import java.sql.*;
-
 /**
  *
  * @author ADMIN
  */
-public class ChatLieuRepository {
+public class SanPhamRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<ChatLieu> getList(){
-        ArrayList<ChatLieu> chatLieus = new ArrayList<>();
+    public ArrayList<SanPham> getList(){
+        ArrayList<SanPham> sanPhams = new ArrayList<>();
         String sql = "select * from CHATLIEU";
         try (Connection con = dBConnection.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
-                ChatLieu cl = new ChatLieu();
-                cl.setId(rs.getInt("Id"));
-                cl.setMa(rs.getString("Ma"));
-                cl.setTen(rs.getString("Ten"));
-                cl.setTrangThai(rs.getInt("TrangThai"));
-                chatLieus.add(cl);
+                SanPham sp = new SanPham();
+                sp.setIdSanPham(rs.getInt("Id"));
+                sp.setMa(rs.getString("Ma"));
+                sp.setTen(rs.getString("Ten"));
+                sp.setTrangThai(rs.getInt("TrangThai"));
+                sanPhams.add(sp);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return chatLieus;
+        return sanPhams;
     }
-    
 }

@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/View/Form_De.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/View/Form_ChatLieu.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/ViewModel/DeModel.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/View/Form_NSX.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/ViewModel/NsxModel.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/ViewModel/SizeModel.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/View/Form_Size.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/Repository/ChiTietSanPhamRepository.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/Interface/ChiTietSanPhamImpl.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/New%20folder/Du_An_1/src/Service/ChiTietSanPhamService.java</file>
         </group>
     </open-files>
 </project-private>
