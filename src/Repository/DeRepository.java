@@ -17,7 +17,7 @@ public class DeRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<De> getList(){
+    public ArrayList<De> getAllDe(){
         ArrayList<De> des = new ArrayList<>();
         String sql = "select * from DE";
         try (Connection con = dBConnection.getConnection();

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface SanPhamImpl {
     
-    public ArrayList<SanPham> getList();
+    public ArrayList<SanPham> getAllSanPhamService();
     
     public String insert(SanPham sp);
     

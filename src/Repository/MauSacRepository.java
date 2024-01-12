@@ -17,7 +17,7 @@ public class MauSacRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<MauSac> getList(){
+    public ArrayList<MauSac> getAllMauSac(){
         ArrayList<MauSac> mauSacs = new ArrayList<>();
         String sql = "select * from MAUSAC";
         try (Connection con = dBConnection.getConnection();

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public interface DanhMucImpl {
-    public ArrayList<DanhMuc> getList();
+    public ArrayList<DanhMuc> getAllDanhMucRepository();
     
     public String insert(DanhMuc cl);
     

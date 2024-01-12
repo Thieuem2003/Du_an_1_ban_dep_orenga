@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface MauSacImpl {
     
-    public ArrayList<MauSac> getList();
+    public ArrayList<MauSac> getAllMauSacService();
     
     public String insert(MauSac ms);
     

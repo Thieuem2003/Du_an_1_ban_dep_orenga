@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface ChatLieuImpl {
     
-    public ArrayList<ChatLieu> getList();
+    public ArrayList<ChatLieu> getAllChatLieuService();
     
     public String insert(ChatLieu cl);
     

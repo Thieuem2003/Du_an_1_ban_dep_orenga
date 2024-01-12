@@ -59,4 +59,11 @@ public class DanhMuc {
         this.ten = ten;
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return ten;
+    }
+    
+    
 }

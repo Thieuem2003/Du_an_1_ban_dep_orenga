@@ -17,9 +17,10 @@ public class SizeService implements SizeImpl{
     
     SizeRepository sizeRepository = new SizeRepository();
 
+    
     @Override
-    public ArrayList<Size> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Size> getAllSizeSevice() {
+        return sizeRepository.getLAllSize();
     }
 
     @Override
@@ -46,6 +47,7 @@ public class SizeService implements SizeImpl{
     public void updateTrangThai(String idSize) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
     
 }

@@ -16,7 +16,7 @@ public class SanPhamRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<SanPham> getList(){
+    public ArrayList<SanPham> getAllSanPham(){
         ArrayList<SanPham> sanPhams = new ArrayList<>();
         String sql = "select * from SANPHAM";
         try (Connection con = dBConnection.getConnection();

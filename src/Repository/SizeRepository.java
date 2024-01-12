@@ -16,7 +16,7 @@ public class SizeRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<Size> getList(){
+    public ArrayList<Size> getLAllSize(){
         ArrayList<Size> sizes = new ArrayList<>();
         String sql = "select * from SIZE";
         try (Connection con = dBConnection.getConnection();

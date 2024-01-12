@@ -17,7 +17,7 @@ public class ChatLieuRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<ChatLieu> getList(){
+    public ArrayList<ChatLieu> getAllChatLieu(){
         ArrayList<ChatLieu> chatLieus = new ArrayList<>();
         String sql = "select * from CHATLIEU";
         try (Connection con = dBConnection.getConnection();

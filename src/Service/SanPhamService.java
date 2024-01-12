@@ -18,8 +18,8 @@ public class SanPhamService implements SanPhamImpl{
     SanPhamRepository sanPhamRepository = new SanPhamRepository();
 
     @Override
-    public ArrayList<SanPham> getList() {
-        return sanPhamRepository.getList();
+    public ArrayList<SanPham> getAllSanPhamService() {
+        return sanPhamRepository.getAllSanPham();
     }
 
     @Override
@@ -46,5 +46,7 @@ public class SanPhamService implements SanPhamImpl{
     public void updateTrangThai(String idSanPham) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
     
 }

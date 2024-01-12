@@ -32,7 +32,7 @@ public class Form_SanPham extends javax.swing.JPanel {
     }
 
     public void fillTableSanPham(){
-        List<SanPham> sanPhams = sanPhamService.getList();
+        List<SanPham> sanPhams = sanPhamService.getAllSanPhamService();
         
         DefaultTableModel model = (DefaultTableModel) tbDanhSach.getModel();
         model.setRowCount(0);

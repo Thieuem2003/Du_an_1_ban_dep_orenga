@@ -18,8 +18,8 @@ public class NsxService implements NsxImpl{
     NsxRepository nsxRepository = new NsxRepository();
 
     @Override
-    public ArrayList<NhaSanXuat> getList() {
-        return nsxRepository.getList();
+    public ArrayList<NhaSanXuat> getAllNsxService() {
+        return nsxRepository.getAllNsx();
     }
 
     @Override

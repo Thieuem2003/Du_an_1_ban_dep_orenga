@@ -18,8 +18,8 @@ public class ChatLieuService implements ChatLieuImpl{
     ChatLieuRepository chatLieuRepository = new ChatLieuRepository();
 
     @Override
-    public ArrayList<ChatLieu> getList() {
-        return chatLieuRepository.getList();
+    public ArrayList<ChatLieu> getAllChatLieuService() {
+        return chatLieuRepository.getAllChatLieu();
     }
 
     @Override

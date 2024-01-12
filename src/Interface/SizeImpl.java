@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface SizeImpl {
     
-    public ArrayList<Size> getList();
+    public ArrayList<Size> getAllSizeSevice();
     
     public String insert(Size sz);
     

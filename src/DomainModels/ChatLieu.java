@@ -66,6 +66,11 @@ public class ChatLieu {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return ten;
+    }
     
     
 }

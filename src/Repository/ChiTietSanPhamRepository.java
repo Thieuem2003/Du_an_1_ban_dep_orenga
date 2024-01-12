@@ -115,7 +115,7 @@ public class ChiTietSanPhamRepository {
 //        return chiTietDeps;
 //    }
     
-    public ArrayList<ChiTietDep> getAll(){
+    public ArrayList<ChiTietDep> getAllChiTiet(){
         ArrayList<ChiTietDep> chiTietDeps = new ArrayList<>();
         String sql = "select * from CHITIETDEP";
         try (Connection con = dBConnection.getConnection();

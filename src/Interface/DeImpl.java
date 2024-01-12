@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public interface DeImpl {
-    public ArrayList<De> getList();
+    public ArrayList<De> getAllDeService();
     
     public String insert(De cl);
     

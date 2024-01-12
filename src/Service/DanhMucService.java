@@ -18,9 +18,10 @@ public class DanhMucService implements DanhMucImpl{
     DanhMucRepository danhMucRepository = new DanhMucRepository();
 
     @Override
-    public ArrayList<DanhMuc> getList() {
-        return danhMucRepository.getList();
+    public ArrayList<DanhMuc> getAllDanhMucRepository() {
+        return danhMucRepository.getAllDanhMuc();
     }
+    
 
     @Override
     public String insert(DanhMuc cl) {
@@ -46,5 +47,6 @@ public class DanhMucService implements DanhMucImpl{
     public void updateTrangThai(String idDanhMuc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
 }

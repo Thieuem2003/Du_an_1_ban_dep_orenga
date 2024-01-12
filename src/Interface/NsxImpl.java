@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface NsxImpl {
     
-    public ArrayList<NhaSanXuat> getList();
+    public ArrayList<NhaSanXuat> getAllNsxService();
     
     public String insert(NhaSanXuat nsx);
     

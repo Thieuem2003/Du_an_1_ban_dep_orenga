@@ -20,7 +20,7 @@ public class ChiTietSanPhamService {
 
     public List<ChiTietDep> getAll(){
         try {
-            return chiTietSanPhamRepository.getAll();
+            return chiTietSanPhamRepository.getAllChiTiet();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -17,7 +17,7 @@ public class NsxRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<NhaSanXuat> getList(){
+    public ArrayList<NhaSanXuat> getAllNsx(){
         ArrayList<NhaSanXuat> nhaSanXuats = new ArrayList<>();
         String sql = "select * from NSX";
         try (Connection con = dBConnection.getConnection();

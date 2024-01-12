@@ -18,8 +18,8 @@ public class MauSacService implements MauSacImpl{
     MauSacRepository mauSacRepository = new MauSacRepository();
 
     @Override
-    public ArrayList<MauSac> getList() {
-        return mauSacRepository.getList();
+    public ArrayList<MauSac> getAllMauSacService() {
+        return mauSacRepository.getAllMauSac();
     }
 
     @Override

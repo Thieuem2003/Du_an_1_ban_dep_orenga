@@ -17,9 +17,9 @@ public class DeService implements DeImpl{
     
     DeRepository deRepository = new DeRepository();
 
-    @Override
-    public ArrayList<De> getList() {
-        return deRepository.getList();
+        @Override
+    public ArrayList<De> getAllDeService() {
+        return deRepository.getAllDe();
     }
 
     @Override
