@@ -17,11 +17,11 @@ public class DanhMucRepository {
     
     DBConnection dBConnection;
     
-    public ArrayList<DanhMuc> getList(){
+    public ArrayList<DanhMuc> getList() throws SQLException{
         ArrayList<DanhMuc> danhMucs = new ArrayList<>();
-        String sql = "select * from DANHMUC";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
+        String sql = "select Ma,Ten  from DANHMUC";
+        Connection con = dBConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
                 DanhMuc danhMuc = new DanhMuc();
@@ -31,9 +31,9 @@ public class DanhMucRepository {
                 danhMuc.setTrangThai(rs.getInt("TrangThai"));
                 danhMucs.add(danhMuc);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        rs.close();
+        ps.close();
+        con.close();
         return danhMucs;
     }
 }

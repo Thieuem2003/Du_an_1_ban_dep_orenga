@@ -4,22 +4,44 @@
  */
 package View;
 
+import DomainModels.DanhMuc;
+import DomainModels.SanPham;
+import Service.ChiTietSanPhamService;
+import Service.DanhMucService;
+import Service.SanPhamService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ADMIN
  */
 public class Form_SanPham extends javax.swing.JPanel {
-
+    
+    SanPhamService sanPhamService = new SanPhamService();
+    DanhMucService danhMucService = new DanhMucService();
+    ChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     /**
      * Creates new form Form_SanPham
      */
     public Form_SanPham() {
         initComponents();
+        fillTableSanPham();
     }
 
+    public void fillTableSanPham(){
+        List<SanPham> sanPhams = sanPhamService.getList();
+        
+        DefaultTableModel model = (DefaultTableModel) tbDanhSach.getModel();
+        model.setRowCount(0);
+        for (SanPham sanPham : sanPhams) {
+            model.addRow(new Object[]{sanPham.getTen(),
+            sanPham.getTrangThai()});
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -4,6 +4,8 @@
  */
 package DomainModels;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author ADMIN
@@ -22,9 +24,22 @@ public class ChiTietDep {
     
     private Integer idChatLieu;
     
-    private Integer idNgaySX;
+    private Integer idNSX;
     
     private Integer idDe;
+//    private DanhMuc idDanhMuc;
+//    
+//    private SanPham idSanPham;
+//    
+//    private Size idSize;
+//    
+//    private MauSac idMauSac;
+//    
+//    private ChatLieu idChatLieu;
+//    
+//    private NhaSanXuat idNSX;
+//    
+//    private De idDe;
     
     private Integer soLuong;
     
@@ -39,14 +54,14 @@ public class ChiTietDep {
     public ChiTietDep() {
     }
 
-    public ChiTietDep(Integer id, Integer idDanhMuc, Integer idSanPham, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNgaySX, Integer idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
+    public ChiTietDep(Integer id, Integer idDanhMuc, Integer idSanPham, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNSX, Integer idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
         this.id = id;
         this.idDanhMuc = idDanhMuc;
         this.idSanPham = idSanPham;
         this.idSize = idSize;
         this.idMauSac = idMauSac;
         this.idChatLieu = idChatLieu;
-        this.idNgaySX = idNgaySX;
+        this.idNSX = idNSX;
         this.idDe = idDe;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
@@ -54,6 +69,23 @@ public class ChiTietDep {
         this.moTa = moTa;
         this.trangThai = trangThai;
     }
+
+    
+//    public ChiTietDep(Integer id, DanhMuc idDanhMuc, SanPham idSanPham, Size idSize, MauSac idMauSac, ChatLieu idChatLieu, NhaSanXuat idNSX, De idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
+//        this.id = id;
+//        this.idDanhMuc = idDanhMuc;
+//        this.idSanPham = idSanPham;
+//        this.idSize = idSize;
+//        this.idMauSac = idMauSac;
+//        this.idChatLieu = idChatLieu;
+//        this.idNSX = idNSX;
+//        this.idDe = idDe;
+//        this.soLuong = soLuong;
+//        this.giaNhap = giaNhap;
+//        this.giaBan = giaBan;
+//        this.moTa = moTa;
+//        this.trangThai = trangThai;
+//    }
 
     public Integer getId() {
         return id;
@@ -103,12 +135,12 @@ public class ChiTietDep {
         this.idChatLieu = idChatLieu;
     }
 
-    public Integer getIdNgaySX() {
-        return idNgaySX;
+    public Integer getIdNSX() {
+        return idNSX;
     }
 
-    public void setIdNgaySX(Integer idNgaySX) {
-        this.idNgaySX = idNgaySX;
+    public void setIdNSX(Integer idNSX) {
+        this.idNSX = idNSX;
     }
 
     public Integer getIdDe() {
@@ -119,6 +151,63 @@ public class ChiTietDep {
         this.idDe = idDe;
     }
 
+//    public DanhMuc getIdDanhMuc() {
+//        return idDanhMuc;
+//    }
+//
+//    public void setIdDanhMuc(DanhMuc idDanhMuc) {
+//        this.idDanhMuc = idDanhMuc;
+//    }
+//
+//    public SanPham getIdSanPham() {
+//        return idSanPham;
+//    }
+//
+//    public void setIdSanPham(SanPham idSanPham) {
+//        this.idSanPham = idSanPham;
+//    }
+//
+//    public Size getIdSize() {
+//        return idSize;
+//    }
+//
+//    public void setIdSize(Size idSize) {
+//        this.idSize = idSize;
+//    }
+//
+//    public MauSac getIdMauSac() {
+//        return idMauSac;
+//    }
+//
+//    public void setIdMauSac(MauSac idMauSac) {
+//        this.idMauSac = idMauSac;
+//    }
+//
+//    public ChatLieu getIdChatLieu() {
+//        return idChatLieu;
+//    }
+//
+//    public void setIdChatLieu(ChatLieu idChatLieu) {
+//        this.idChatLieu = idChatLieu;
+//    }
+//
+//    public NhaSanXuat getIdNSX() {
+//        return idNSX;
+//    }
+//
+//    public void setIdNSX(NhaSanXuat idNSX) {
+//        this.idNSX = idNSX;
+//    }
+//
+//    public De getIdDe() {
+//        return idDe;
+//    }
+//
+//    public void setIdDe(De idDe) {
+//        this.idDe = idDe;
+//    }
+//    
+    
     public Integer getSoLuong() {
         return soLuong;
     }

@@ -7,7 +7,14 @@ package View;
 import DomainModels.ChiTietDep;
 import DomainModels.SanPham;
 import Interface.ChiTietSanPhamImpl;
+import Service.ChatLieuService;
 import Service.ChiTietSanPhamService;
+import Service.DanhMucService;
+import Service.DeService;
+import Service.MauSacService;
+import Service.NsxService;
+import Service.SanPhamService;
+import Service.SizeService;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,39 +29,30 @@ public class Form_ChiTiet extends javax.swing.JFrame {
     /**
      * Creates new form Form_ChiTiet
      */
-    ChiTietSanPhamImpl chiTietSanPhamImpl = new ChiTietSanPhamService();
-    List<ChiTietDep> chiTietDeps = chiTietSanPhamImpl.getList();
-    DefaultTableModel model;
+    ChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+    DanhMucService danhMucService = new DanhMucService();
+    SanPhamService sanPhamService = new SanPhamService();
+    ChatLieuService chatLieuService = new ChatLieuService();
+    MauSacService mauSacService = new MauSacService();
+    SizeService sizeService = new SizeService();
+    DeService deService = new DeService();
+    NsxService nsxService = new NsxService();
     
     public Form_ChiTiet() {
         initComponents();
         setLocationRelativeTo(null);
-        fillTableSanPham(chiTietDeps);
+        fillTableSanPham();
     }
 
-    public void fillTableSanPham(List<ChiTietDep> listChiTietDeps){
-        if (listChiTietDeps.isEmpty()) {
-            System.out.println("List San Pham Rong");
-        } else {
-            model = (DefaultTableModel) tblDanhSach.getModel();
-            model.setRowCount(0);
-            
-            for (ChiTietDep sp : listChiTietDeps) {
-                model.addRow(new Object[]{
-                    sp.getIdDanhMuc(),
-                    sp.getIdSanPham(),
-                    sp.getIdChatLieu(),
-                    sp.getIdMauSac(),
-                    sp.getIdDe(),
-                    sp.getIdNgaySX(),
-                    sp.getIdSize(),
-                    sp.getSoLuong(),
-                    sp.getGiaNhap(),
-                    sp.getGiaBan(),
-                    sp.getMoTa(),
-                    sp.getTrangThai()
-                });
-            }
+    public void fillTableSanPham(){
+        List<ChiTietDep> chiTietDeps = chiTietSanPhamService.getAll();
+        
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setRowCount(0);
+        for (ChiTietDep ctd : chiTietDeps) {
+            model.addRow(new Object[]{ctd.getIdDanhMuc(),ctd.getIdSanPham(),
+            ctd.getIdSize(),ctd.getIdMauSac(),ctd.getIdChatLieu(),ctd.getIdNSX(),
+            ctd.getIdDe(),ctd.getSoLuong(),ctd.getGiaBan(),ctd.getMoTa(),ctd.getTrangThai()});
         }
     }
     /**
@@ -153,13 +151,13 @@ public class Form_ChiTiet extends javax.swing.JFrame {
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Danh Mục", "Sản Phẩm ", "Size", "Màu Sắc", "Chất Liệu", "Nhà Sản Xuất", "Đế", "Số Lượng", "Giá", "Mô Tả", "Trạng Thái"
             }
         ));
         jScrollPane2.setViewportView(tblDanhSach);
