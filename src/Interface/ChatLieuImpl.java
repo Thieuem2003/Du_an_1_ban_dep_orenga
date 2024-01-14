@@ -19,8 +19,6 @@ public interface ChatLieuImpl {
     
     public String update(ChatLieu cl);
     
-    public String delete(String id);
-    
     public String getIDByName(String chatLieu);
     
     public void updateTrangThai(String idChatLieu);

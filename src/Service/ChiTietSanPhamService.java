@@ -7,18 +7,20 @@ package Service;
 import DomainModels.ChiTietDep;
 import Interface.ChiTietSanPhamImpl;
 import Repository.ChiTietSanPhamRepository;
+import ViewModel.ChiTietSPModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  *
  * @author ADMIN
  */
 public class ChiTietSanPhamService {
-    
+
     ChiTietSanPhamRepository chiTietSanPhamRepository = new ChiTietSanPhamRepository();
 
-    public List<ChiTietDep> getAll(){
+    public List<ChiTietDep> getAll() {
         try {
             return chiTietSanPhamRepository.getAllChiTiet();
         } catch (Exception e) {
@@ -26,79 +28,24 @@ public class ChiTietSanPhamService {
             return null;
         }
     }
-//    @Override
-//    public ArrayList<ChiTietDep> getList() {
-//        return chiTietSanPhamRepository.getList();
-//    }
-//
-//    @Override
-//    public String insert(ChiTietDep cl) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public String update(ChiTietDep cl) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public String delete(String id) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public String getIDByName(String chiTietDep) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public void updateTrangThai(String idChiTietDep) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<ChiTietDep> getChiTietDeps() {
-//        List<ChiTietDep> ctds = new ArrayList<>();
-//        List<ChiTietDep> chiTietDeps = chiTietSanPhamRepository.getList();
-//        for (int i = 0; i < chiTietDeps.size(); i++) {
-//            ChiTietDep chiTietDep = new ChiTietDep();
-//            chiTietDep.setIdDanhMuc(chiTietSanPhamRepository.getTenDanhMuc));
-//        }
-//        return ctds;
-//    }
-//
-//    @Override
-//    public List<String> getDanhMuc() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getSanPham() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getChatLieu() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getMauSac() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getNSX() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getDe() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<String> getSize() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
+
+    public List<ChiTietDep> getAllHdSp(){
+        return  this.chiTietSanPhamRepository.getAllHoaDonSP();
+    }
+    
+    public ArrayList<ChiTietDep> getCTSPByDanhMuc(String danhMuc){
+        return  chiTietSanPhamRepository.getCTSPbyDanhMuc(danhMuc);
+    }
+    
+    public ArrayList<ChiTietDep> getCTSPByMauSac(String mauSac){
+        return  chiTietSanPhamRepository.getCTSPbyMauSac(mauSac);
+    }
+    public ArrayList<ChiTietDep> getCTSPBySize(String size){
+        return  chiTietSanPhamRepository.getCTSPbySIZE(size);
+    }
+    public ArrayList<ChiTietDep> getCTSPByNSX(String nsx){
+        return  chiTietSanPhamRepository.getCTSPbyNSX(nsx);
+    }
+
+
 }

@@ -7,7 +7,10 @@ package Service;
 import DomainModels.ChatLieu;
 import Interface.ChatLieuImpl;
 import Repository.ChatLieuRepository;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,17 +27,23 @@ public class ChatLieuService implements ChatLieuImpl{
 
     @Override
     public String insert(ChatLieu cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        try {
+//            return chatLieuRepository.insert(cl);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ChatLieuService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+//        }
     }
 
     @Override
     public String update(ChatLieu cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ChatLieu chatLieu = new ChatLieu();
+        chatLieu.setMa(cl.getMa());
+        chatLieu.setTen(cl.getTen());
+        if (chatLieuRepository.update(chatLieu)) {
+            return "Sua Thanh Cong";
+        }
+        return "Sua That Bai";
     }
 
     @Override

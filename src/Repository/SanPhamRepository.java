@@ -6,8 +6,11 @@ package Repository;
 
 import DomainModels.SanPham;
 import Utilities.DBConnection;
+import Utilities.JDBCHelper;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ADMIN
@@ -34,5 +37,20 @@ public class SanPhamRepository {
             e.printStackTrace();
         }
         return sanPhams;
+    }
+    
+    public SanPham getSanPhamByID(String id) {
+
+        String sql = "SELECT * FROM SANPHAM WHERE Id=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, id);
+        try {
+            while (rs.next()) {
+                return new SanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(ChatLieuRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

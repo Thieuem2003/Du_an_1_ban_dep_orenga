@@ -6,9 +6,11 @@ package Repository;
 
 import DomainModels.DanhMuc;
 import Utilities.DBConnection;
+import Utilities.JDBCHelper;
 import java.util.ArrayList;
 import java.sql.*;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ADMIN
@@ -38,5 +40,20 @@ public class DanhMucRepository {
         return danhMucs;
         
         
+    }
+    
+    public DanhMuc getDanhMucByID(String id) {
+
+        String sql = "SELECT * FROM DANHMUC WHERE Id=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, id);
+        try {
+            while (rs.next()) {
+                return new DanhMuc(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(DanhMucRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

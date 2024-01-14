@@ -13,247 +13,166 @@ import DomainModels.NhaSanXuat;
 import DomainModels.SanPham;
 import DomainModels.Size;
 import Utilities.DBConnection;
+import Utilities.JDBCHelper;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
 public class ChiTietSanPhamRepository {
-    
+
     DBConnection dBConnection;
-    
-//    public ArrayList<ChiTietDep> getAll() throws SQLException{
-//        ArrayList<ChiTietDep> chiTietDeps = new ArrayList<>();
-//        Connection con = dBConnection.getConnection();
-//        String sql = "SELECT\n" +
-//"    CHITIETDEP.Id,\n" +
-//"    DANHMUC.Ten,\n" +
-//"    SANPHAM.Ten,\n" +
-//"    SIZE.KichCo,\n" +
-//"    MAUSAC.MauSac,\n" +
-//"    CHATLIEU.Ten,\n" +
-//"    NSX.Ten ,\n" +
-//"    DE.Ten,\n" +
-//"    CHITIETDEP.SoLuong,\n" +
-//"    CHITIETDEP.GiaNhap,\n" +
-//"    CHITIETDEP.GiaBan,\n" +
-//"    CHITIETDEP.MoTa,\n" +
-//"    CHITIETDEP.TrangThai\n" +
-//"FROM CHITIETDEP\n" +
-//"JOIN DANHMUC ON CHITIETDEP.IdDanhMuc = DANHMUC.Id\n" +
-//"JOIN SANPHAM ON CHITIETDEP.IdSanPham = SANPHAM.Id\n" +
-//"JOIN SIZE ON CHITIETDEP.IdSize = SIZE.Id\n" +
-//"JOIN MAUSAC ON CHITIETDEP.IdMauSac = MAUSAC.Id\n" +
-//"JOIN CHATLIEU ON CHITIETDEP.IdChatLieu = CHATLIEU.Id\n" +
-//"JOIN NSX ON CHITIETDEP.IdNSX = NSX.Id\n" +
-//"JOIN DE ON CHITIETDEP.IdDe = DE.Id;";
-//        PreparedStatement ps = con.prepareStatement(sql);
-//        ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {        
-//                Integer danhMuc1 = rs.getInt("IdDanhMuc");
-//                Integer sanPham1 = rs.getInt("IdSanPham");
-//                Integer size1 = rs.getInt("IdSize");
-//                Integer mauSac1 = rs.getInt("IdMauSac");
-//                Integer chatLieu1 = rs.getInt("IdChatLieu");
-//                Integer NSX1 = rs.getInt("IdNSX");
-//                Integer De1 = rs.getInt("IdDe");
-//                Integer soLuong = rs.getInt("SoLuong");
-//                Float giaNhap = rs.getFloat("GiaNhap");
-//                Float giaBan = rs.getFloat("GiaBan");
-//                String moTa = rs.getString("MoTa");
-//                Integer trangThai = rs.getInt("TrangThai");
-//                
-//                DanhMuc danhMuc = new DanhMuc();
-//                danhMuc.setIdDanhMuc(danhMuc1);
-////                danhMuc.setTen(rs.getString("DanhMucTen"));
-//
-//                SanPham sanPham = new SanPham();
-//                sanPham.setIdSanPham(sanPham1);
-////                sanPham.setTen(rs.getString("SanPhamTen"));
-//
-//                Size size = new Size();
-//                size.setKichCo(rs.getFloat(size1));
-//
-//                MauSac mauSac = new MauSac();
-//                mauSac.setId(mauSac1);
-////                mauSac.setMauSac(rs.getString("MauSac"));
-//
-//                ChatLieu chatLieu = new ChatLieu();
-//                chatLieu.setId(chatLieu1);
-////                chatLieu.setTen(rs.getString("ChatLieuTen"));
-//
-//                NhaSanXuat nhaSanXuat = new NhaSanXuat();
-//                nhaSanXuat.setId(NSX1);
-////                nhaSanXuat.setTen(rs.getString("NhaSanXuatTen"));
-//
-//                De de = new De();
-//                de.setIdDe(De1);
-////                de.setTen(rs.getString("DonViTinh"));
-//
-//                // Creating ChiTietDep object and adding to the list
-//                ChiTietDep chiTietDep = new ChiTietDep();
-//                chiTietDep.setId(rs.getInt("Id"));
-//                chiTietDep.setIdDanhMuc(danhMuc);
-//                chiTietDep.setIdSanPham(sanPham);
-//                chiTietDep.setIdSize(size);
-//                chiTietDep.setIdMauSac(mauSac);
-//                chiTietDep.setIdChatLieu(chatLieu);
-//                chiTietDep.setIdNSX(nhaSanXuat);
-//                chiTietDep.setIdDe(de);
-//                chiTietDep.setSoLuong(soLuong);
-//                chiTietDep.setGiaNhap(giaNhap);
-//                chiTietDep.setGiaBan(giaBan);
-//                chiTietDep.setMoTa(moTa);
-//                chiTietDep.setTrangThai(trangThai);
-//
-//                chiTietDeps.add(chiTietDep);
-//            }
-//        
-//        return chiTietDeps;
-//    }
-    
-    public ArrayList<ChiTietDep> getAllChiTiet(){
-        ArrayList<ChiTietDep> chiTietDeps = new ArrayList<>();
-        String sql = "select * from CHITIETDEP";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                ChiTietDep chiTietDep = new ChiTietDep();
-                chiTietDep.setId(rs.getInt("Id"));
-                chiTietDep.setIdDanhMuc(rs.getInt("IdDanhMuc"));
-                chiTietDep.setIdSanPham(rs.getInt("IdSanPham"));
-                chiTietDep.setIdSize(rs.getInt("IdSize"));
-                chiTietDep.setIdMauSac(rs.getInt("IdMauSac"));
-                chiTietDep.setIdChatLieu(rs.getInt("IdChatLieu"));
-                chiTietDep.setIdNSX(rs.getInt("IdNSX"));
-                chiTietDep.setIdDe(rs.getInt("IdDe"));
-                chiTietDep.setSoLuong(rs.getInt("SoLuong"));
-                chiTietDep.setGiaNhap(rs.getFloat("GiaNhap"));
-                chiTietDep.setGiaBan(rs.getFloat("GiaBan"));
-                chiTietDep.setMoTa(rs.getString("MoTa"));
-                chiTietDep.setTrangThai(rs.getInt("TrangThai"));
-                chiTietDeps.add(chiTietDep);
+    SanPhamRepository spr = new SanPhamRepository();
+    DanhMucRepository dmr = new DanhMucRepository();
+    SizeRepository sizer = new SizeRepository();
+    MauSacRepository msr = new MauSacRepository();
+    ChatLieuRepository clr = new ChatLieuRepository();
+    DeRepository der = new DeRepository();
+    NsxRepository nsxr = new NsxRepository();
+
+    public ArrayList<ChiTietDep> getAllChiTiet() {
+        ArrayList<ChiTietDep> listctd = new ArrayList<>();
+        String sql = "SELECT * FROM CHITIETDEP";
+        ResultSet rs = JDBCHelper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                listctd.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return chiTietDeps;
+        return listctd;
     }
-    
-    
-    public String getTenDanhMuc(String idDanhMuc){
-        String sql = "select Ten from DANHMUC where Id = ?";
-        String tenDanhMuc = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idDanhMuc);
+
+    public ArrayList<ChiTietDep> getCTSPbyDanhMuc(String danhMuc) {
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.IdSize, a.IdNSX, a.IdDe, DanhMuc.Ten "
+                + "FROM CHITIETDEP a "
+                + "JOIN DANHMUC ON a.IdDanhMuc = DanhMuc.Id "
+                + "WHERE DanhMuc.Ten LIKE ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + danhMuc + "%");
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                tenDanhMuc = rs.getString("Ten");
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public boolean addChiTiet(ChiTietDep chiTietDep) {
+        String sql = "insert into CHITIETDEP (IdDanhMuc,IdSanPham,IdSize,IdMauSac,\n"
+                + "IdChatLieu,IdNSX,IdDe,SoLuong,GiaBan,MoTa,HinhAnh,TrangThai) values \n"
+                + " (?,?,?,?,?,?,?,?,?,?,?,?)";
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, chiTietDep.getIdDanhMuc());
+            ps.setObject(2, chiTietDep.getIdSanPham());
+            ps.setObject(3, chiTietDep.getIdSize());
+            ps.setObject(4, chiTietDep.getIdMauSac());
+            ps.setObject(5, chiTietDep.getIdChatLieu());
+            ps.setObject(6, chiTietDep.getIdNSX());
+            ps.setObject(7, chiTietDep.getIdDe());
+            ps.setObject(8, chiTietDep.getSoLuong());
+            ps.setObject(9, chiTietDep.getGiaBan());
+            ps.setObject(10, chiTietDep.getMoTa());
+            ps.setObject(11, chiTietDep.getHinhAnh());
+            ps.setObject(12, chiTietDep.getTrangThai());
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateChiTiet(ChiTietDep chiTietDep) {
+        String sql = "{CALL updateCHITIETDEP (?,?,?,?,?,?,?,?,?,?,?,?)}";
+        try (Connection con = DBConnection.getConnection()) {
+            CallableStatement ps = con.prepareCall(sql);
+
+            ps.setObject(1, chiTietDep.getIdDanhMuc());
+            ps.setObject(2, chiTietDep.getIdSanPham());
+            ps.setObject(3, chiTietDep.getIdSize());
+            ps.setObject(4, chiTietDep.getIdMauSac());
+            ps.setObject(5, chiTietDep.getIdChatLieu());
+            ps.setObject(6, chiTietDep.getIdNSX());
+            ps.setObject(7, chiTietDep.getIdDe());
+            ps.setObject(8, chiTietDep.getSoLuong());
+            ps.setObject(9, chiTietDep.getGiaBan());
+            ps.setObject(10, chiTietDep.getMoTa());
+            ps.setObject(11, chiTietDep.getHinhAnh());
+            ps.setObject(12, chiTietDep.getTrangThai());
+
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public ArrayList<ChiTietDep> getAllHoaDonSP() {
+        ArrayList<ChiTietDep> listctd = new ArrayList<>();
+       String sql = "SELECT * FROM CHITIETDEP";
+       ResultSet rs  = JDBCHelper.excuteQuery(sql);
+        try {
+            while(rs.next()){
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                listctd.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12),rs.getString(13), rs.getInt(14)));
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return tenDanhMuc;
+        return  listctd;
     }
-    
-    public String getTenSanPham(String idSanPham){
-        String sql = "select Ten from SANPHAM where Id =  ?";
-        String tenSanPham = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idSanPham);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                tenSanPham = rs.getString("Ten");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tenSanPham;
+
+    public ArrayList<ChiTietDep> getCTSPbyMauSac(String mauSac) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public String getDoCaoDe(String idDe){
-        String sql = "select Ten from DANHMUC where Id = ?";
-        String doCaoDe = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idDe);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                doCaoDe = rs.getString("Ten");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return doCaoDe;
+
+    public ArrayList<ChiTietDep> getCTSPbySIZE(String size) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public String getKichCoSize(String idSize){
-        String sql = "select KichCo from SIZE where Id = ?";
-        String kichCo = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idSize);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                kichCo = rs.getString("KichCo");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return kichCo;
+
+    public ArrayList<ChiTietDep> getCTSPbyNSX(String nsx) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public String getTenNSX(String idNsx){
-        String sql = "select Ten from NSX where Id = ?";
-        String nsx = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idNsx);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                nsx = rs.getString("Ten");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return nsx;
-    }
-    
-    public String getTenChatLieu(String idChatLieu){
-        String sql = "select Ten from CHATLIEU where Id = ?";
-        String tenChatLieu = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idChatLieu);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                tenChatLieu = rs.getString("KichCo");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tenChatLieu;
-    }
-    
-    public String getTenMauSac(String idMauSac){
-        String sql = "select Ten from CHATLIEU where Id = ?";
-        String tenMauSac = "";
-        try (Connection con = dBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setObject(1, idMauSac);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                tenMauSac = rs.getString("KichCo");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tenMauSac;
-    }
+
 }

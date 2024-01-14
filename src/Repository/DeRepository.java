@@ -6,9 +6,11 @@ package Repository;
 
 import DomainModels.De;
 import Utilities.DBConnection;
+import Utilities.JDBCHelper;
 import java.util.ArrayList;
 import java.sql.*;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ADMIN
@@ -35,5 +37,19 @@ public class DeRepository {
             e.printStackTrace();
         }
         return des;
+    }
+    public De getDeByID(String id) {
+
+        String sql = "SELECT * FROM DE WHERE Id=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, id);
+        try {
+            while (rs.next()) {
+                return new De(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(DeRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

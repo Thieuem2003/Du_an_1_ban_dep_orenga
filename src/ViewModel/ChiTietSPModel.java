@@ -4,6 +4,14 @@
  */
 package ViewModel;
 
+import DomainModels.ChatLieu;
+import DomainModels.DanhMuc;
+import DomainModels.De;
+import DomainModels.MauSac;
+import DomainModels.NhaSanXuat;
+import DomainModels.SanPham;
+import DomainModels.Size;
+
 /**
  *
  * @author ADMIN
@@ -12,19 +20,19 @@ public class ChiTietSPModel {
     
     private Integer id;
     
-    private Integer idDanhMuc;
+    private DanhMuc tenDanhMuc;
     
-    private Integer idSanPham;
+    private SanPham tenSanPham;
     
-    private Integer idSize;
+    private Size tenSize;
     
-    private Integer idMauSac;
+    private MauSac tenMauSac;
     
-    private Integer idChatLieu;
+    private ChatLieu tenChatLieu;
     
-    private Integer idNgaySX;
+    private NhaSanXuat tenNhaSX;
     
-    private Integer idDe;
+    private De tenDe;
     
     private Integer soLuong;
     
@@ -34,26 +42,27 @@ public class ChiTietSPModel {
     
     private String moTa;
     
+    private String imageUrl;
+    
     private Integer trangThai;
 
     public ChiTietSPModel() {
     }
 
-    
-
-    public ChiTietSPModel(Integer id, Integer idDanhMuc, Integer idSanPham, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNgaySX, Integer idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
+    public ChiTietSPModel(Integer id, DanhMuc tenDanhMuc, SanPham tenSanPham, Size tenSize, MauSac tenMauSac, ChatLieu tenChatLieu, NhaSanXuat tenNhaSX, De tenDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, String imageUrl, Integer trangThai) {
         this.id = id;
-        this.idDanhMuc = idDanhMuc;
-        this.idSanPham = idSanPham;
-        this.idSize = idSize;
-        this.idMauSac = idMauSac;
-        this.idChatLieu = idChatLieu;
-        this.idNgaySX = idNgaySX;
-        this.idDe = idDe;
+        this.tenDanhMuc = tenDanhMuc;
+        this.tenSanPham = tenSanPham;
+        this.tenSize = tenSize;
+        this.tenMauSac = tenMauSac;
+        this.tenChatLieu = tenChatLieu;
+        this.tenNhaSX = tenNhaSX;
+        this.tenDe = tenDe;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.moTa = moTa;
+        this.imageUrl = imageUrl;
         this.trangThai = trangThai;
     }
 
@@ -65,60 +74,60 @@ public class ChiTietSPModel {
         this.id = id;
     }
 
-    public Integer getIdDanhMuc() {
-        return idDanhMuc;
+    public DanhMuc getTenDanhMuc() {
+        return tenDanhMuc;
     }
 
-    public void setIdDanhMuc(Integer idDanhMuc) {
-        this.idDanhMuc = idDanhMuc;
+    public void setTenDanhMuc(DanhMuc tenDanhMuc) {
+        this.tenDanhMuc = tenDanhMuc;
     }
 
-    public Integer getIdSanPham() {
-        return idSanPham;
+    public SanPham getTenSanPham() {
+        return tenSanPham;
     }
 
-    public void setIdSanPham(Integer idSanPham) {
-        this.idSanPham = idSanPham;
+    public void setTenSanPham(SanPham tenSanPham) {
+        this.tenSanPham = tenSanPham;
     }
 
-    public Integer getIdSize() {
-        return idSize;
+    public Size getTenSize() {
+        return tenSize;
     }
 
-    public void setIdSize(Integer idSize) {
-        this.idSize = idSize;
+    public void setTenSize(Size tenSize) {
+        this.tenSize = tenSize;
     }
 
-    public Integer getIdMauSac() {
-        return idMauSac;
+    public MauSac getTenMauSac() {
+        return tenMauSac;
     }
 
-    public void setIdMauSac(Integer idMauSac) {
-        this.idMauSac = idMauSac;
+    public void setTenMauSac(MauSac tenMauSac) {
+        this.tenMauSac = tenMauSac;
     }
 
-    public Integer getIdChatLieu() {
-        return idChatLieu;
+    public ChatLieu getTenChatLieu() {
+        return tenChatLieu;
     }
 
-    public void setIdChatLieu(Integer idChatLieu) {
-        this.idChatLieu = idChatLieu;
+    public void setTenChatLieu(ChatLieu tenChatLieu) {
+        this.tenChatLieu = tenChatLieu;
     }
 
-    public Integer getIdNgaySX() {
-        return idNgaySX;
+    public NhaSanXuat getTenNhaSX() {
+        return tenNhaSX;
     }
 
-    public void setIdNgaySX(Integer idNgaySX) {
-        this.idNgaySX = idNgaySX;
+    public void setTenNhaSX(NhaSanXuat tenNhaSX) {
+        this.tenNhaSX = tenNhaSX;
     }
 
-    public Integer getIdDe() {
-        return idDe;
+    public De getTenDe() {
+        return tenDe;
     }
 
-    public void setIdDe(Integer idDe) {
-        this.idDe = idDe;
+    public void setTenDe(De tenDe) {
+        this.tenDe = tenDe;
     }
 
     public Integer getSoLuong() {
@@ -153,6 +162,14 @@ public class ChiTietSPModel {
         this.moTa = moTa;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Integer getTrangThai() {
         return trangThai;
     }
@@ -161,4 +178,6 @@ public class ChiTietSPModel {
         this.trangThai = trangThai;
     }
 
+    
+    
 }

@@ -6,9 +6,11 @@ package Repository;
 
 import DomainModels.NhaSanXuat;
 import Utilities.DBConnection;
+import Utilities.JDBCHelper;
 import java.util.ArrayList;
 import java.sql.*;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ADMIN
@@ -35,5 +37,20 @@ public class NsxRepository {
             e.printStackTrace();
         }
         return nhaSanXuats;
+    }
+    
+    public NhaSanXuat getNSXByID(String id) {
+
+        String sql = "SELECT * FROM NSX WHERE Id=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, id);
+        try {
+            while (rs.next()) {
+                return new NhaSanXuat(rs.getInt(1), rs.getString(2), rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(MauSacRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

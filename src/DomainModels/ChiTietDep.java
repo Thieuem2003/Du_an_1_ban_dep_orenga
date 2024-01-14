@@ -5,6 +5,13 @@
 package DomainModels;
 
 import java.math.BigDecimal;
+import DomainModels.ChatLieu;
+import DomainModels.DanhMuc;
+import DomainModels.De;
+import DomainModels.MauSac;
+import DomainModels.NhaSanXuat;
+import DomainModels.SanPham;
+import DomainModels.Size;
 
 /**
  *
@@ -12,241 +19,165 @@ import java.math.BigDecimal;
  */
 public class ChiTietDep {
     
-    private Integer id;
+    private Integer Id;
     
-    private Integer idDanhMuc;
+    private DanhMuc IdDanhMuc;
     
-    private Integer idSanPham;
+    private SanPham IdSanPham;
     
-    private Integer idSize;
+    private Size IdSize;
     
-    private Integer idMauSac;
+    private MauSac IdMauSac;
     
-    private Integer idChatLieu;
+    private ChatLieu IdChatLieu;
     
-    private Integer idNSX;
+    private NhaSanXuat IdNSX;
     
-    private Integer idDe;
-//    private DanhMuc idDanhMuc;
-//    
-//    private SanPham idSanPham;
-//    
-//    private Size idSize;
-//    
-//    private MauSac idMauSac;
-//    
-//    private ChatLieu idChatLieu;
-//    
-//    private NhaSanXuat idNSX;
-//    
-//    private De idDe;
+    private De IdDe;
     
-    private Integer soLuong;
+    private Integer SoLuong;
     
-    private Float giaNhap;
+    private Float GiaNhap;
     
-    private Float giaBan;
+    private Float GiaBan;
     
-    private String moTa;
+    private String MoTa;
     
-    private Integer trangThai;
+    private String HinhAnh;
+    
+    private Integer TrangThai;
 
     public ChiTietDep() {
     }
 
-    public ChiTietDep(Integer id, Integer idDanhMuc, Integer idSanPham, Integer idSize, Integer idMauSac, Integer idChatLieu, Integer idNSX, Integer idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
-        this.id = id;
-        this.idDanhMuc = idDanhMuc;
-        this.idSanPham = idSanPham;
-        this.idSize = idSize;
-        this.idMauSac = idMauSac;
-        this.idChatLieu = idChatLieu;
-        this.idNSX = idNSX;
-        this.idDe = idDe;
-        this.soLuong = soLuong;
-        this.giaNhap = giaNhap;
-        this.giaBan = giaBan;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
+    public ChiTietDep(Integer Id, DanhMuc IdDanhMuc, SanPham IdSanPham, Size IdSize, MauSac IdMauSac, ChatLieu IdChatLieu, NhaSanXuat IdNSX, De IdDe, Integer SoLuong, Float GiaNhap, Float GiaBan, String MoTa, String HinhAnh, Integer TrangThai) {
+        this.Id = Id;
+        this.IdDanhMuc = IdDanhMuc;
+        this.IdSanPham = IdSanPham;
+        this.IdSize = IdSize;
+        this.IdMauSac = IdMauSac;
+        this.IdChatLieu = IdChatLieu;
+        this.IdNSX = IdNSX;
+        this.IdDe = IdDe;
+        this.SoLuong = SoLuong;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.MoTa = MoTa;
+        this.HinhAnh = HinhAnh;
+        this.TrangThai = TrangThai;
     }
-
-    
-//    public ChiTietDep(Integer id, DanhMuc idDanhMuc, SanPham idSanPham, Size idSize, MauSac idMauSac, ChatLieu idChatLieu, NhaSanXuat idNSX, De idDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, Integer trangThai) {
-//        this.id = id;
-//        this.idDanhMuc = idDanhMuc;
-//        this.idSanPham = idSanPham;
-//        this.idSize = idSize;
-//        this.idMauSac = idMauSac;
-//        this.idChatLieu = idChatLieu;
-//        this.idNSX = idNSX;
-//        this.idDe = idDe;
-//        this.soLuong = soLuong;
-//        this.giaNhap = giaNhap;
-//        this.giaBan = giaBan;
-//        this.moTa = moTa;
-//        this.trangThai = trangThai;
-//    }
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
-    public Integer getIdDanhMuc() {
-        return idDanhMuc;
+    public DanhMuc getIdDanhMuc() {
+        return IdDanhMuc;
     }
 
-    public void setIdDanhMuc(Integer idDanhMuc) {
-        this.idDanhMuc = idDanhMuc;
+    public void setIdDanhMuc(DanhMuc IdDanhMuc) {
+        this.IdDanhMuc = IdDanhMuc;
     }
 
-    public Integer getIdSanPham() {
-        return idSanPham;
+    public SanPham getIdSanPham() {
+        return IdSanPham;
     }
 
-    public void setIdSanPham(Integer idSanPham) {
-        this.idSanPham = idSanPham;
+    public void setIdSanPham(SanPham IdSanPham) {
+        this.IdSanPham = IdSanPham;
     }
 
-    public Integer getIdSize() {
-        return idSize;
+    public Size getIdSize() {
+        return IdSize;
     }
 
-    public void setIdSize(Integer idSize) {
-        this.idSize = idSize;
+    public void setIdSize(Size IdSize) {
+        this.IdSize = IdSize;
     }
 
-    public Integer getIdMauSac() {
-        return idMauSac;
+    public MauSac getIdMauSac() {
+        return IdMauSac;
     }
 
-    public void setIdMauSac(Integer idMauSac) {
-        this.idMauSac = idMauSac;
+    public void setIdMauSac(MauSac IdMauSac) {
+        this.IdMauSac = IdMauSac;
     }
 
-    public Integer getIdChatLieu() {
-        return idChatLieu;
+    public ChatLieu getIdChatLieu() {
+        return IdChatLieu;
     }
 
-    public void setIdChatLieu(Integer idChatLieu) {
-        this.idChatLieu = idChatLieu;
+    public void setIdChatLieu(ChatLieu IdChatLieu) {
+        this.IdChatLieu = IdChatLieu;
     }
 
-    public Integer getIdNSX() {
-        return idNSX;
+    public NhaSanXuat getIdNSX() {
+        return IdNSX;
     }
 
-    public void setIdNSX(Integer idNSX) {
-        this.idNSX = idNSX;
+    public void setIdNSX(NhaSanXuat IdNSX) {
+        this.IdNSX = IdNSX;
     }
 
-    public Integer getIdDe() {
-        return idDe;
+    public De getIdDe() {
+        return IdDe;
     }
 
-    public void setIdDe(Integer idDe) {
-        this.idDe = idDe;
+    public void setIdDe(De IdDe) {
+        this.IdDe = IdDe;
     }
 
-//    public DanhMuc getIdDanhMuc() {
-//        return idDanhMuc;
-//    }
-//
-//    public void setIdDanhMuc(DanhMuc idDanhMuc) {
-//        this.idDanhMuc = idDanhMuc;
-//    }
-//
-//    public SanPham getIdSanPham() {
-//        return idSanPham;
-//    }
-//
-//    public void setIdSanPham(SanPham idSanPham) {
-//        this.idSanPham = idSanPham;
-//    }
-//
-//    public Size getIdSize() {
-//        return idSize;
-//    }
-//
-//    public void setIdSize(Size idSize) {
-//        this.idSize = idSize;
-//    }
-//
-//    public MauSac getIdMauSac() {
-//        return idMauSac;
-//    }
-//
-//    public void setIdMauSac(MauSac idMauSac) {
-//        this.idMauSac = idMauSac;
-//    }
-//
-//    public ChatLieu getIdChatLieu() {
-//        return idChatLieu;
-//    }
-//
-//    public void setIdChatLieu(ChatLieu idChatLieu) {
-//        this.idChatLieu = idChatLieu;
-//    }
-//
-//    public NhaSanXuat getIdNSX() {
-//        return idNSX;
-//    }
-//
-//    public void setIdNSX(NhaSanXuat idNSX) {
-//        this.idNSX = idNSX;
-//    }
-//
-//    public De getIdDe() {
-//        return idDe;
-//    }
-//
-//    public void setIdDe(De idDe) {
-//        this.idDe = idDe;
-//    }
-//    
-    
     public Integer getSoLuong() {
-        return soLuong;
+        return SoLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
-        this.soLuong = soLuong;
+    public void setSoLuong(Integer SoLuong) {
+        this.SoLuong = SoLuong;
     }
 
     public Float getGiaNhap() {
-        return giaNhap;
+        return GiaNhap;
     }
 
-    public void setGiaNhap(Float giaNhap) {
-        this.giaNhap = giaNhap;
+    public void setGiaNhap(Float GiaNhap) {
+        this.GiaNhap = GiaNhap;
     }
 
     public Float getGiaBan() {
-        return giaBan;
+        return GiaBan;
     }
 
-    public void setGiaBan(Float giaBan) {
-        this.giaBan = giaBan;
+    public void setGiaBan(Float GiaBan) {
+        this.GiaBan = GiaBan;
     }
 
     public String getMoTa() {
-        return moTa;
+        return MoTa;
     }
 
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
+    }
+
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public void setHinhAnh(String HinhAnh) {
+        this.HinhAnh = HinhAnh;
     }
 
     public Integer getTrangThai() {
-        return trangThai;
+        return TrangThai;
     }
 
-    public void setTrangThai(Integer trangThai) {
-        this.trangThai = trangThai;
+    public void setTrangThai(Integer TrangThai) {
+        this.TrangThai = TrangThai;
     }
 
-    
+
 }
