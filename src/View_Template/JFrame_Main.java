@@ -7,8 +7,9 @@ package View_Template;
 
 import View.Form_BanHang;
 import View.Form_KhachHang;
+import View.Form_NV;
 
-import View.Form_NhanVien;
+
 import View.Form_QLHoaDon;
 import View.Form_SanPham;
 import View.Form_ThongKe;
@@ -43,7 +44,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                    }else if(index == 4){
                        setForm(new Form_SanPham());
                    }else if(index == 6){
-                       setForm(new Form_NhanVien());
+                       setForm(new Form_NV());
                    }else if(index == 8){
                        setForm( new Form_KhachHang());
                    }else if(index == 10){

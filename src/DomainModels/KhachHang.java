@@ -128,6 +128,20 @@ public class KhachHang {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "KhachHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngaySinh=" + ngaySinh + ", gioiTinh=" + gioiTinh + ", sdt=" + sdt + ", email=" + email + ", diaChi=" + diaChi + ", diemTichLuy=" + diemTichLuy + ", trangThai=" + trangThai + '}';
+    }
+//       public String getGioiTinh(int gioiTinh){
+//        if(gioiTinh==1){
+//            return " Nam";
+//        }else{
+//        
+//        return "Nữ"
+//                    ;
+//        }
+//    }
     
     
 }

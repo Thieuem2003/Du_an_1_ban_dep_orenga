@@ -16,40 +16,40 @@ public class NguoiDung {
     
     private Integer idChucVu;
     
-    private String ma;
+    private String maNguoiDung;
     
-    private String ten;
+    private String tenNguoiDung;
     
-    private Date ngaySinh;
+    private Date ngaySinhNguoiDung;
     
-    private String email;
+    private String emailNguoiDung;
     
-    private String sdt;
+    private String sdtNguoiDung;
     
-    private Integer gioiTinh;
+    private Integer gioiTinhNguoiDung;
     
-    private String matKhau;
+    private String diaChiNguoiDung;
     
-    private Integer TrangThai;
+    private String matKhauNguoiDung;
     
-    private String hinhAnh;
+    private Integer trangThaiNguoiDung;
 
+    
     public NguoiDung() {
     }
-    
 
-    public NguoiDung(Integer idNguoiDung, Integer idChucVu, String ma, String ten, Date ngaySinh, String email, String sdt, Integer gioiTinh, String matKhau, Integer TrangThai, String hinhAnh) {
+    public NguoiDung(Integer idNguoiDung, Integer idChucVu, String maNguoiDung, String tenNguoiDung, Date ngaySinhNguoiDung, String emailNguoiDung, String sdtNguoiDung, Integer gioiTinhNguoiDung, String diaChiNguoiDung, String matKhauNguoiDung, Integer trangThaiNguoiDung) {
         this.idNguoiDung = idNguoiDung;
         this.idChucVu = idChucVu;
-        this.ma = ma;
-        this.ten = ten;
-        this.ngaySinh = ngaySinh;
-        this.email = email;
-        this.sdt = sdt;
-        this.gioiTinh = gioiTinh;
-        this.matKhau = matKhau;
-        this.TrangThai = TrangThai;
-        this.hinhAnh = hinhAnh;
+        this.maNguoiDung = maNguoiDung;
+        this.tenNguoiDung = tenNguoiDung;
+        this.ngaySinhNguoiDung = ngaySinhNguoiDung;
+        this.emailNguoiDung = emailNguoiDung;
+        this.sdtNguoiDung = sdtNguoiDung;
+        this.gioiTinhNguoiDung = gioiTinhNguoiDung;
+        this.diaChiNguoiDung = diaChiNguoiDung;
+        this.matKhauNguoiDung = matKhauNguoiDung;
+        this.trangThaiNguoiDung = trangThaiNguoiDung;
     }
 
     public Integer getIdNguoiDung() {
@@ -68,78 +68,97 @@ public class NguoiDung {
         this.idChucVu = idChucVu;
     }
 
-    public String getMa() {
-        return ma;
+    public String getMaNguoiDung() {
+        return maNguoiDung;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setMaNguoiDung(String maNguoiDung) {
+        this.maNguoiDung = maNguoiDung;
     }
 
-    public String getTen() {
-        return ten;
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
+    public Date getNgaySinhNguoiDung() {
+        return ngaySinhNguoiDung;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setNgaySinhNguoiDung(Date ngaySinhNguoiDung) {
+        this.ngaySinhNguoiDung = ngaySinhNguoiDung;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailNguoiDung() {
+        return emailNguoiDung;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailNguoiDung(String emailNguoiDung) {
+        this.emailNguoiDung = emailNguoiDung;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getSdtNguoiDung() {
+        return sdtNguoiDung;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setSdtNguoiDung(String sdtNguoiDung) {
+        this.sdtNguoiDung = sdtNguoiDung;
     }
 
-    public Integer getGioiTinh() {
-        return gioiTinh;
+    public Integer getGioiTinhNguoiDung() {
+        return gioiTinhNguoiDung;
     }
 
-    public void setGioiTinh(Integer gioiTinh) {
-        this.gioiTinh = gioiTinh;
+    public void setGioiTinhNguoiDung(Integer gioiTinhNguoiDung) {
+        this.gioiTinhNguoiDung = gioiTinhNguoiDung;
     }
 
-    public String getMatKhau() {
-        return matKhau;
+    public String getDiaChiNguoiDung() {
+        return diaChiNguoiDung;
     }
 
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
+    public void setDiaChiNguoiDung(String diaChiNguoiDung) {
+        this.diaChiNguoiDung = diaChiNguoiDung;
     }
 
-    public Integer getTrangThai() {
-        return TrangThai;
+    public String getMatKhauNguoiDung() {
+        return matKhauNguoiDung;
     }
 
-    public void setTrangThai(Integer TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setMatKhauNguoiDung(String matKhauNguoiDung) {
+        this.matKhauNguoiDung = matKhauNguoiDung;
     }
 
-    public String getHinhAnh() {
-        return hinhAnh;
+    public Integer getTrangThaiNguoiDung() {
+        return trangThaiNguoiDung;
     }
 
-    public void setHinhAnh(String hinhAnh) {
-        this.hinhAnh = hinhAnh;
+    public void setTrangThaiNguoiDung(Integer trangThaiNguoiDung) {
+        this.trangThaiNguoiDung = trangThaiNguoiDung;
     }
 
+    @Override
+    public String toString() {
+        return "NguoiDung{" + "idNguoiDung=" + idNguoiDung + ", idChucVu=" + idChucVu + ", maNguoiDung=" + maNguoiDung + ", tenNguoiDung=" + tenNguoiDung + ", ngaySinhNguoiDung=" + ngaySinhNguoiDung + ", emailNguoiDung=" + emailNguoiDung + ", sdtNguoiDung=" + sdtNguoiDung + ", gioiTinhNguoiDung=" + gioiTinhNguoiDung + ", diaChiNguoiDung=" + diaChiNguoiDung + ", matKhauNguoiDung=" + matKhauNguoiDung + ", trangThaiNguoiDung=" + trangThaiNguoiDung + '}';
+    }
 
+    public NguoiDung(String maNguoiDung, String tenNguoiDung, Date ngaySinhNguoiDung, String emailNguoiDung, String sdtNguoiDung, Integer gioiTinhNguoiDung, String diaChiNguoiDung, String matKhauNguoiDung, Integer trangThaiNguoiDung) {
+        this.maNguoiDung = maNguoiDung;
+        this.tenNguoiDung = tenNguoiDung;
+        this.ngaySinhNguoiDung = ngaySinhNguoiDung;
+        this.emailNguoiDung = emailNguoiDung;
+        this.sdtNguoiDung = sdtNguoiDung;
+        this.gioiTinhNguoiDung = gioiTinhNguoiDung;
+        this.diaChiNguoiDung = diaChiNguoiDung;
+        this.matKhauNguoiDung = matKhauNguoiDung;
+        this.trangThaiNguoiDung = trangThaiNguoiDung;
+    }
+
+    
+    
+    
     
 }

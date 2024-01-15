@@ -118,6 +118,22 @@ public class KhuyenMai {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
+
+    public KhuyenMai(String ma, String ten, Float phanTramGiam, Integer soLuong, Date ngayBatDau, Date ngayKetThuc, Integer trangThai, String moTa) {
+        this.ma = ma;
+        this.ten = ten;
+        this.phanTramGiam = phanTramGiam;
+        this.soLuong = soLuong;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+
+    @Override
+    public String toString() {
+        return "KhuyenMai{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", phanTramGiam=" + phanTramGiam + ", soLuong=" + soLuong + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", trangThai=" + trangThai + ", moTa=" + moTa + '}';
+    }
     
     
 }
