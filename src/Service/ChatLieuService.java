@@ -27,28 +27,24 @@ public class ChatLieuService implements ChatLieuImpl{
 
     @Override
     public String insert(ChatLieu cl) {
-//        try {
-//            return chatLieuRepository.insert(cl);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ChatLieuService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-//        }
+        if (chatLieuRepository.insertChatLieu(cl)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(ChatLieu cl) {
-        ChatLieu chatLieu = new ChatLieu();
-        chatLieu.setMa(cl.getMa());
-        chatLieu.setTen(cl.getTen());
-        if (chatLieuRepository.update(chatLieu)) {
+    public String update(String Ma,ChatLieu cl) {
+        if (chatLieuRepository.updateChatLieu(Ma, cl)) {
             return "Sua Thanh Cong";
         }
         return "Sua That Bai";
     }
 
     @Override
-    public String getIDByName(String chatLieu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ChatLieu getIDByName(String chatLieu) {
+        return chatLieuRepository.getChatLieuTen(chatLieu);
     }
 
     @Override

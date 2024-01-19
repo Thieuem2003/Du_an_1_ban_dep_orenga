@@ -33,13 +33,13 @@ public class SanPhamService implements SanPhamImpl{
     }
 
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public SanPham getSanPhamMa(String ma) {
+        return sanPhamRepository.getSanPhamMa(ma);
     }
 
     @Override
-    public String getIDByName(String sanPham) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public SanPham getIDByName(String sanPham) {
+        return sanPhamRepository.getSanPhamTen(sanPham);
     }
 
     @Override

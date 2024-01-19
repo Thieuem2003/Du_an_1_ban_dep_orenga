@@ -24,22 +24,25 @@ public class MauSacService implements MauSacImpl{
 
     @Override
     public String insert(MauSac ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (mauSacRepository.insertMauSac(ms)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(MauSac ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(String Ma,MauSac ms) {
+        if (mauSacRepository.updateMauSac(Ma, ms)) {
+            return "Cap Nhat Thanh Cong";
+        } else {
+            return "Cap Nhat That Bai";
+        }
     }
 
     @Override
-    public String delete(String ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getIDByName(String mauSac) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public MauSac getIDByName(String mauSac) {
+        return mauSacRepository.getMauSacTen(mauSac);
     }
 
     @Override

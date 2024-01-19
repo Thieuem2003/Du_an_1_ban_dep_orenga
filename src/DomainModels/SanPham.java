@@ -21,11 +21,6 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(Integer idSanPham, String ma, String ten) {
-        this.idSanPham = idSanPham;
-        this.ma = ma;
-        this.ten = ten;
-    }
 
     public SanPham(Integer idSanPham, String ma, String ten, Integer trangThai) {
         this.idSanPham = idSanPham;

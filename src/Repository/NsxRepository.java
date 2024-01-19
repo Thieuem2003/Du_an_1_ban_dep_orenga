@@ -45,12 +45,55 @@ public class NsxRepository {
         ResultSet rs = JDBCHelper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
-                return new NhaSanXuat(rs.getInt(1), rs.getString(2), rs.getString(3));
+                return new NhaSanXuat(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4));
             }
         } catch (SQLException ex) {
             
-           Logger.getLogger(MauSacRepository.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(NsxRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public NhaSanXuat getNSXTen(String ten) {
+
+        String sql = "SELECT * FROM NSX WHERE Ten=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, ten);
+        try {
+            while (rs.next()) {
+                return new NhaSanXuat(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(NsxRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean insertNsx(NhaSanXuat nsx) {
+        String sql = "insert into NSX (Ma , Ten) values (?,?)";
+        try (Connection connection = dBConnection.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setObject(1, nsx.getMa());
+            ps.setObject(2, nsx.getTen());
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException ex) {
+           Logger.getLogger(NsxRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean updateNsx(String Ma, NhaSanXuat nsx) {
+        try {
+            Connection connection = dBConnection.getConnection();
+            String sql = "update NSX set Ten = ? where Ma = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setObject(1, nsx.getTen());
+            ps.setObject(2, nsx.getMa());
+            
+            ps.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(NsxRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

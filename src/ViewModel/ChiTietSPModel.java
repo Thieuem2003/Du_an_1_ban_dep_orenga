@@ -20,9 +20,9 @@ public class ChiTietSPModel {
     
     private Integer id;
     
-    private DanhMuc tenDanhMuc;
-    
     private SanPham tenSanPham;
+    
+    private DanhMuc tenDanhMuc;
     
     private Size tenSize;
     
@@ -49,10 +49,27 @@ public class ChiTietSPModel {
     public ChiTietSPModel() {
     }
 
-    public ChiTietSPModel(Integer id, DanhMuc tenDanhMuc, SanPham tenSanPham, Size tenSize, MauSac tenMauSac, ChatLieu tenChatLieu, NhaSanXuat tenNhaSX, De tenDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, String imageUrl, Integer trangThai) {
+    public ChiTietSPModel(Integer id, SanPham tenSanPham, DanhMuc tenDanhMuc, Size tenSize, MauSac tenMauSac, ChatLieu tenChatLieu, NhaSanXuat tenNhaSX, De tenDe, Integer soLuong, Float giaBan, String moTa, Integer trangThai) {
         this.id = id;
-        this.tenDanhMuc = tenDanhMuc;
         this.tenSanPham = tenSanPham;
+        this.tenDanhMuc = tenDanhMuc;
+        this.tenSize = tenSize;
+        this.tenMauSac = tenMauSac;
+        this.tenChatLieu = tenChatLieu;
+        this.tenNhaSX = tenNhaSX;
+        this.tenDe = tenDe;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
+    
+    
+
+    public ChiTietSPModel(Integer id, SanPham tenSanPham, DanhMuc tenDanhMuc, Size tenSize, MauSac tenMauSac, ChatLieu tenChatLieu, NhaSanXuat tenNhaSX, De tenDe, Integer soLuong, Float giaNhap, Float giaBan, String moTa, String imageUrl, Integer trangThai) {
+        this.id = id;
+        this.tenSanPham = tenSanPham;
+        this.tenDanhMuc = tenDanhMuc;
         this.tenSize = tenSize;
         this.tenMauSac = tenMauSac;
         this.tenChatLieu = tenChatLieu;
@@ -65,6 +82,8 @@ public class ChiTietSPModel {
         this.imageUrl = imageUrl;
         this.trangThai = trangThai;
     }
+
+
 
     public Integer getId() {
         return id;

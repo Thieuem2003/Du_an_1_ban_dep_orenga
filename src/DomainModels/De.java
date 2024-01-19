@@ -21,11 +21,6 @@ public class De {
     public De() {
     }
 
-    public De(Integer idDe, String ma, String ten) {
-        this.idDe = idDe;
-        this.ma = ma;
-        this.ten = ten;
-    }
 
     public De(Integer idDe, String ma, String ten, Integer trangThai) {
         this.idDe = idDe;

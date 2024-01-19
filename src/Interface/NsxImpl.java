@@ -17,11 +17,9 @@ public interface NsxImpl {
     
     public String insert(NhaSanXuat nsx);
     
-    public String update(NhaSanXuat nsx);
+    public String update(String Ma,NhaSanXuat nsx);
     
-    public String delete(String id);
-    
-    public String getIDByName(String nsx);
+    public NhaSanXuat getIDByName(String nsx);
     
     public void updateTrangThai(String idNSX);
 }

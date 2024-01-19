@@ -21,12 +21,6 @@ public class Size {
     public Size() {
     }
 
-    public Size(Integer idSize, String ma, Float kichCo) {
-        this.idSize = idSize;
-        this.ma = ma;
-        this.kichCo = kichCo;
-    }
-
     
     public Size(Integer idSize, String ma, Float kichCo, Integer trangThai) {
         this.idSize = idSize;

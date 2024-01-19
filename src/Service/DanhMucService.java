@@ -13,34 +13,35 @@ import java.util.ArrayList;
  *
  * @author ADMIN
  */
-public class DanhMucService implements DanhMucImpl{
-    
+public class DanhMucService implements DanhMucImpl {
+
     DanhMucRepository danhMucRepository = new DanhMucRepository();
 
     @Override
     public ArrayList<DanhMuc> getAllDanhMucRepository() {
         return danhMucRepository.getAllDanhMuc();
     }
-    
 
     @Override
-    public String insert(DanhMuc cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String insert(DanhMuc dm) {
+        if (danhMucRepository.insertDanhMuc(dm)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(DanhMuc cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(String Ma, DanhMuc dm) {
+        if (danhMucRepository.updateDanhMuc(Ma, dm)) {
+            return "Cap Nhat Thanh Cong";
+        }
+        return "Cap Nhat That Bai";
     }
 
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getIDByName(String danhMuc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DanhMuc getIDByName(String danhMuc) {
+        return danhMucRepository.getDanhMucTen(danhMuc);
     }
 
     @Override
@@ -48,5 +49,4 @@ public class DanhMucService implements DanhMucImpl{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }

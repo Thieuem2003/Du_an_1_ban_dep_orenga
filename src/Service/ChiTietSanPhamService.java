@@ -28,24 +28,85 @@ public class ChiTietSanPhamService {
             return null;
         }
     }
-
-    public List<ChiTietDep> getAllHdSp(){
-        return  this.chiTietSanPhamRepository.getAllHoaDonSP();
+    
+    public String insertChiTiet(ChiTietSPModel ctd){
+        if (chiTietSanPhamRepository.addChiTiet(ctd)) {
+            return "Them Thanh Cong";
+        }else{
+            return "Them That Bai";
+        }
     }
     
-    public ArrayList<ChiTietDep> getCTSPByDanhMuc(String danhMuc){
-        return  chiTietSanPhamRepository.getCTSPbyDanhMuc(danhMuc);
+    public String insertChiTietSanPham(ChiTietSPModel ctd){
+        if (chiTietSanPhamRepository.addChiTietSanPham(ctd)) {
+            return "Them Thanh Cong";
+        }else{
+            return "Them That Bai";
+        }
     }
     
-    public ArrayList<ChiTietDep> getCTSPByMauSac(String mauSac){
-        return  chiTietSanPhamRepository.getCTSPbyMauSac(mauSac);
-    }
-    public ArrayList<ChiTietDep> getCTSPBySize(String size){
-        return  chiTietSanPhamRepository.getCTSPbySIZE(size);
-    }
-    public ArrayList<ChiTietDep> getCTSPByNSX(String nsx){
-        return  chiTietSanPhamRepository.getCTSPbyNSX(nsx);
+    public String updateChiTiet(ChiTietSPModel ctd){
+        if (chiTietSanPhamRepository.updateChiTiet(ctd)) {
+            return "Sua Thanh Cong";
+        }else{
+            return "Sua That Bai";
+        }
     }
 
+    public List<ChiTietDep> getAllHdSp() {
+        return this.chiTietSanPhamRepository.getAllHoaDonSP();
+    }
+    
+    public List<ChiTietDep> getAllSanPham() {
+        return this.chiTietSanPhamRepository.getAllSanPham();
+    }
+
+    public ArrayList<ChiTietDep> getCTSPByDanhMuc(String danhMuc) {
+        return chiTietSanPhamRepository.getCTSPbyDanhMuc(danhMuc);
+    }
+
+    public ArrayList<ChiTietDep> getCTSPByMauSac(String mauSac) {
+        return chiTietSanPhamRepository.getCTSPbyMauSac(mauSac);
+    }
+
+    public ArrayList<ChiTietDep> getCTSPBySize(String size) {
+        return chiTietSanPhamRepository.getCTSPbySIZE(size);
+    }
+
+    public ArrayList<ChiTietDep> getCTSPByNSX(String nsx) {
+        return chiTietSanPhamRepository.getCTSPbyNSX(nsx);
+    }
+
+    public ArrayList<ChiTietDep> getCTSPbyChatLieu(String chatLieu) {
+        return chiTietSanPhamRepository.getCTSPbyChatLieu(chatLieu);
+    }
+
+    public List<String> getDanhMuc() {
+        return chiTietSanPhamRepository.getDanhMuc();
+    }
+
+    public List<String> getDe() {
+        return chiTietSanPhamRepository.getDe();
+    }
+
+    public List<String> getSanPham() {
+        return chiTietSanPhamRepository.getSanPham();
+    }
+
+    public List<String> getSize() {
+        return chiTietSanPhamRepository.getSize();
+    }
+
+    public List<String> getNsx() {
+        return chiTietSanPhamRepository.getNSX();
+    }
+
+    public List<String> getChatLieu() {
+        return chiTietSanPhamRepository.getChatLieu();
+    }
+
+    public List<String> getMauSac() {
+        return chiTietSanPhamRepository.getMauSac();
+    }
 
 }

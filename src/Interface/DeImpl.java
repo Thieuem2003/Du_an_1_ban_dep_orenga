@@ -16,11 +16,9 @@ public interface DeImpl {
     
     public String insert(De cl);
     
-    public String update(De cl);
+    public String update(String Ma,De cl);
     
-    public String delete(String id);
-    
-    public String getIDByName(String de);
+    public De getIDByName(String de);
     
     public void updateTrangThai(String idDe);
 }

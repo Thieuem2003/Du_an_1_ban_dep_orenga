@@ -19,9 +19,9 @@ public interface SanPhamImpl {
     
     public String update(SanPham sp);
     
-    public String delete(String id);
+    public SanPham getSanPhamMa(String ma);
     
-    public String getIDByName(String sanPham);
+    public SanPham getIDByName(String sanPham);
     
     public void updateTrangThai(String idSanPham);
 }

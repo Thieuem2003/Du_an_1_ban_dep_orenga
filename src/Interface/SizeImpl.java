@@ -17,11 +17,9 @@ public interface SizeImpl {
     
     public String insert(Size sz);
     
-    public String update(Size sz);
+    public String update(String Ma,Size sz);
     
-    public String delete(String id);
-    
-    public String getIDByName(String size);
+    public Size getIDByName(String size);
     
     public void updateTrangThai(String idSize);
 }

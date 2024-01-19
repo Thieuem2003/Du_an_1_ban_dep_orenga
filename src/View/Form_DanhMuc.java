@@ -4,12 +4,15 @@
  */
 package View;
 
+import DomainModels.DanhMuc;
+import Service.DanhMucService;
 import Utilities.DBConnection;
 import ViewModel.DanhMucModel;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ADMIN
@@ -19,7 +22,7 @@ public class Form_DanhMuc extends javax.swing.JFrame {
     /**
      * Creates new form Form_DanhMuc
      */
-    
+    DanhMucService danhMucService = new DanhMucService();
     DanhMucModel dm;
     Connection cn;
     Statement st;
@@ -31,10 +34,10 @@ public class Form_DanhMuc extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         titleTable();
         countDB();
-        if (count % 10 == 0) {
-            soTrang = count / 10;
+        if (count % 5 == 0) {
+            soTrang = count / 5;
         } else {
-            soTrang = count / 10 + 1;
+            soTrang = count / 5 + 1;
         }
         loadData(1);
         lbSoTrang.setText("1/" + soTrang);
@@ -70,7 +73,7 @@ public class Form_DanhMuc extends javax.swing.JFrame {
         titleTable();
         dm.getDataVector().removeAllElements();
         try {
-            String query = "Select top 10 * from DANHMUC where Ten not in (Select top " + (trang * 10 - 10) + " Ten from DANHMUC)";
+            String query = "Select top 5 * from DANHMUC where Ten not in (Select top " + (trang * 5 - 5) + " Ten from DANHMUC)";
             cn = DBConnection.getConnection();
             st = cn.createStatement();
             rs = st.executeQuery(query);
@@ -101,19 +104,20 @@ public class Form_DanhMuc extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        txtTenDanhMuc = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnCapNhat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
         btLonMax = new javax.swing.JButton();
         btNhoMax = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        txtMaDanhMuc = new javax.swing.JTextField();
         btNho = new javax.swing.JButton();
         btLon = new javax.swing.JButton();
         lbTrang = new javax.swing.JLabel();
         lbSoTrang = new javax.swing.JLabel();
         lbClose = new javax.swing.JLabel();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,13 +127,23 @@ public class Form_DanhMuc extends javax.swing.JFrame {
 
         jLabel18.setText("Tên Danh Mục");
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Them.png"))); // NOI18N
-        jButton8.setText("Thêm");
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Them.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Sua.png"))); // NOI18N
-        jButton9.setText("Cập Nhật");
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Sua.png"))); // NOI18N
+        btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +153,11 @@ public class Form_DanhMuc extends javax.swing.JFrame {
                 "Mã Danh Mục", "Tên Danh Mục"
             }
         ));
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDanhSach);
 
         btLonMax.setText(">>");
@@ -180,51 +199,65 @@ public class Form_DanhMuc extends javax.swing.JFrame {
             }
         });
 
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-clear-16.png"))); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btNhoMax)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btNho, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbTrang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btLon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btLonMax)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbSoTrang)
+                        .addGap(87, 87, 87))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel17))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(txtMaDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(txtTenDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88))))))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
-                                    .addGap(18, 18, 18))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(lbClose)
-                                    .addGap(136, 136, 136)))
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(96, 96, 96)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(105, 105, 105)
-                            .addComponent(jButton9))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addComponent(btNhoMax)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btNho, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbTrang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btLon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btLonMax)
-                .addGap(18, 18, 18)
-                .addComponent(lbSoTrang)
-                .addGap(87, 87, 87))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane2))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbClose))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnCapNhat)
+                                .addGap(45, 45, 45)
+                                .addComponent(btnReset)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -234,7 +267,7 @@ public class Form_DanhMuc extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap(35, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
                         .addGap(34, 34, 34))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -242,22 +275,24 @@ public class Form_DanhMuc extends javax.swing.JFrame {
                         .addComponent(lbClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addGap(31, 31, 31)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btnCapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btLonMax)
                     .addComponent(btNhoMax)
                     .addComponent(btNho)
-                    .addComponent(btLon)
                     .addComponent(lbTrang)
-                    .addComponent(lbSoTrang)))
+                    .addComponent(btLon)
+                    .addComponent(btLonMax)
+                    .addComponent(lbSoTrang))
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,57 +345,107 @@ public class Form_DanhMuc extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbCloseMouseClicked
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if (txtMaDanhMuc.getText().trim().equals("") || txtTenDanhMuc.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Moi ban nhap day du thong tin.");
+            return;
+        }
+        try {
+            String ma = txtMaDanhMuc.getText();
+            String ten = txtTenDanhMuc.getText();
+            DanhMuc danhMuc = new DanhMuc(0, ma, ten);
+            danhMucService.insert(danhMuc);
+            loadData(trang);
+            JOptionPane.showMessageDialog(this, "Add thanh cong.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Add that bai.");
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        if (txtMaDanhMuc.getText().trim().equals("") || txtTenDanhMuc.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Moi ban chon ban ghi.");
+            return;
+        }
+        try {
+            String ma = txtMaDanhMuc.getText();
+            String ten = txtTenDanhMuc.getText();
+            DanhMuc danhMuc = new DanhMuc(0, ma, ten);
+            danhMucService.update(ma, danhMuc);
+            loadData(trang);
+            JOptionPane.showMessageDialog(this, "Cap nhat thanh cong.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cap nhat that bai.");
+        }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtMaDanhMuc.setText("");
+        txtTenDanhMuc.setText("");
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        int index = tblDanhSach.getSelectedRow();
+        
+        String ma = (String) tblDanhSach.getValueAt(index, 0);
+        String ten = (String) tblDanhSach.getValueAt(index, 1);
+        
+        txtMaDanhMuc.setText(ma);
+        txtTenDanhMuc.setText(ten);
+    }//GEN-LAST:event_tblDanhSachMouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Form_DanhMuc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
-////            public void run() {
-////                new Form_DanhMuc().setVisible(true);
-////            }
+//            public void run() {
+//                new Form_DanhMuc().setVisible(true);
+//            }
 //        });
-    }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLon;
     private javax.swing.JButton btLonMax;
     private javax.swing.JButton btNho;
     private javax.swing.JButton btNhoMax;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnThem;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbClose;
     private javax.swing.JLabel lbSoTrang;
     private javax.swing.JLabel lbTrang;
     private javax.swing.JTable tblDanhSach;
+    private javax.swing.JTextField txtMaDanhMuc;
+    private javax.swing.JTextField txtTenDanhMuc;
     // End of variables declaration//GEN-END:variables
 }

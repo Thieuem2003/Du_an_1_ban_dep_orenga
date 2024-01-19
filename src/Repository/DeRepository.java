@@ -52,4 +52,47 @@ public class DeRepository {
         }
         return null;
     }
+    
+    public De getDeTen(String ten) {
+
+        String sql = "SELECT * FROM DE WHERE Ten=?";
+        ResultSet rs = JDBCHelper.excuteQuery(sql, ten);
+        try {
+            while (rs.next()) {
+                return new De(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            
+           Logger.getLogger(DeRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean insertDe(De de) {
+        String sql = "insert into DE (Ma , Ten) values (?,?)";
+        try (Connection connection = dBConnection.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setObject(1, de.getMa());
+            ps.setObject(2, de.getTen());
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(DeRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean updateDe(String Ma,De de) {
+        try {
+            Connection connection = dBConnection.getConnection();
+
+            String sql = "update DE set Ten = ? where Ma = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setObject(1, de.getTen());
+            ps.setObject(2, de.getMa());
+            ps.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

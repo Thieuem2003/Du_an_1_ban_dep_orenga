@@ -24,22 +24,25 @@ public class NsxService implements NsxImpl{
 
     @Override
     public String insert(NhaSanXuat nsx) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (nsxRepository.insertNsx(nsx)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(NhaSanXuat nsx) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(String Ma,NhaSanXuat nsx) {
+        if (nsxRepository.updateNsx(Ma, nsx)) {
+            return "Cap Nhat Thanh Cong";
+        } else {
+            return "Cap Nhat That Bai";
+        }
     }
 
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getIDByName(String nsx) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public NhaSanXuat getIDByName(String nsx) {
+        return nsxRepository.getNSXTen(nsx);
     }
 
     @Override

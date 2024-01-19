@@ -24,22 +24,25 @@ public class DeService implements DeImpl{
 
     @Override
     public String insert(De cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (deRepository.insertDe(cl)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(De cl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(String Ma,De cl) {
+        if (deRepository.updateDe(Ma, cl)) {
+            return "Cap Nhat Thanh Cong";
+        } else {
+            return "Cap Nhat That Bai";
+        }
     }
-
+    
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getIDByName(String de) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public De getIDByName(String de) {
+        return deRepository.getDeTen(de);
     }
 
     @Override

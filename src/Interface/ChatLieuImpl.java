@@ -17,9 +17,9 @@ public interface ChatLieuImpl {
     
     public String insert(ChatLieu cl);
     
-    public String update(ChatLieu cl);
+    public String update(String Ma,ChatLieu cl);
     
-    public String getIDByName(String chatLieu);
+    public ChatLieu getIDByName(String chatLieu);
     
     public void updateTrangThai(String idChatLieu);
 }

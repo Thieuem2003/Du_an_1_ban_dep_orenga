@@ -21,6 +21,14 @@ public class DanhMuc {
     public DanhMuc() {
     }
 
+    public DanhMuc(Integer idDanhMuc, String ma, String ten) {
+        this.idDanhMuc = idDanhMuc;
+        this.ma = ma;
+        this.ten = ten;
+    }
+    
+    
+
     public Integer getIdDanhMuc() {
         return idDanhMuc;
     }

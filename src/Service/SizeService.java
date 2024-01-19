@@ -25,22 +25,25 @@ public class SizeService implements SizeImpl{
 
     @Override
     public String insert(Size sz) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (sizeRepository.insertSize(sz)) {
+            return "Them Thanh Cong";
+        } else {
+            return "Them That Bai";
+        }
     }
 
     @Override
-    public String update(Size sz) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(String Ma,Size sz) {
+        if (sizeRepository.updateSize(Ma, sz)) {
+            return "Cap Nhat Thanh Cong";
+        } else {
+            return "Cap Nhat That Bai";
+        }
     }
 
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getIDByName(String size) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Size getIDByName(String size) {
+        return sizeRepository.getSizeTen(size);
     }
 
     @Override

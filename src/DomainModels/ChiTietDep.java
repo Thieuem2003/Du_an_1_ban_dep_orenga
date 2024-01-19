@@ -18,42 +18,59 @@ import DomainModels.Size;
  * @author ADMIN
  */
 public class ChiTietDep {
-    
+
     private Integer Id;
-    
-    private DanhMuc IdDanhMuc;
-    
+
     private SanPham IdSanPham;
-    
+
+    private DanhMuc IdDanhMuc;
+
     private Size IdSize;
-    
+
     private MauSac IdMauSac;
-    
+
     private ChatLieu IdChatLieu;
-    
+
     private NhaSanXuat IdNSX;
-    
+
     private De IdDe;
-    
+
     private Integer SoLuong;
-    
+
     private Float GiaNhap;
-    
+
     private Float GiaBan;
-    
+
     private String MoTa;
-    
+
     private String HinhAnh;
-    
+
     private Integer TrangThai;
 
     public ChiTietDep() {
     }
 
-    public ChiTietDep(Integer Id, DanhMuc IdDanhMuc, SanPham IdSanPham, Size IdSize, MauSac IdMauSac, ChatLieu IdChatLieu, NhaSanXuat IdNSX, De IdDe, Integer SoLuong, Float GiaNhap, Float GiaBan, String MoTa, String HinhAnh, Integer TrangThai) {
+    public ChiTietDep(Integer Id, SanPham IdSanPham, DanhMuc IdDanhMuc, Size IdSize, MauSac IdMauSac, ChatLieu IdChatLieu, NhaSanXuat IdNSX, De IdDe, Integer SoLuong, Float GiaBan, String MoTa, Integer TrangThai) {
         this.Id = Id;
-        this.IdDanhMuc = IdDanhMuc;
         this.IdSanPham = IdSanPham;
+        this.IdDanhMuc = IdDanhMuc;
+        this.IdSize = IdSize;
+        this.IdMauSac = IdMauSac;
+        this.IdChatLieu = IdChatLieu;
+        this.IdNSX = IdNSX;
+        this.IdDe = IdDe;
+        this.SoLuong = SoLuong;
+        this.GiaBan = GiaBan;
+        this.MoTa = MoTa;
+        this.TrangThai = TrangThai;
+    }
+
+    
+    
+    public ChiTietDep(Integer Id, SanPham IdSanPham, DanhMuc IdDanhMuc, Size IdSize, MauSac IdMauSac, ChatLieu IdChatLieu, NhaSanXuat IdNSX, De IdDe, Integer SoLuong, Float GiaNhap, Float GiaBan, String MoTa, String HinhAnh, Integer TrangThai) {
+        this.Id = Id;
+        this.IdSanPham = IdSanPham;
+        this.IdDanhMuc = IdDanhMuc;
         this.IdSize = IdSize;
         this.IdMauSac = IdMauSac;
         this.IdChatLieu = IdChatLieu;
@@ -178,6 +195,5 @@ public class ChiTietDep {
     public void setTrangThai(Integer TrangThai) {
         this.TrangThai = TrangThai;
     }
-
 
 }

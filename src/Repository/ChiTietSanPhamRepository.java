@@ -14,6 +14,7 @@ import DomainModels.SanPham;
 import DomainModels.Size;
 import Utilities.DBConnection;
 import Utilities.JDBCHelper;
+import ViewModel.ChiTietSPModel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.sql.*;
@@ -40,14 +41,14 @@ public class ChiTietSanPhamRepository {
         ResultSet rs = JDBCHelper.excuteQuery(sql);
         try {
             while (rs.next()) {
-                SanPham sp = spr.getSanPhamByID(rs.getString(3));
-                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                SanPham sp = spr.getSanPhamByID(rs.getString(2));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(3));
                 Size s = sizer.getSizeByID(rs.getString(4));
                 MauSac ms = msr.getMauSacID(rs.getString(5));
                 ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
                 NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
                 De d = der.getDeByID(rs.getString(8));
-                listctd.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+                listctd.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
 
             }
         } catch (Exception e) {
@@ -77,7 +78,7 @@ public class ChiTietSanPhamRepository {
                 ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
                 NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
                 De d = der.getDeByID(rs.getString(8));
-                list.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
 
             }
             c.close();
@@ -90,23 +91,41 @@ public class ChiTietSanPhamRepository {
 
     }
 
-    public boolean addChiTiet(ChiTietDep chiTietDep) {
+    public boolean addChiTiet(ChiTietSPModel chiTietDep) {
         String sql = "insert into CHITIETDEP (IdDanhMuc,IdSanPham,IdSize,IdMauSac,\n"
-                + "IdChatLieu,IdNSX,IdDe,SoLuong,GiaBan,MoTa,HinhAnh,TrangThai) values \n"
-                + " (?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "IdChatLieu,IdNSX,IdDe,SoLuong,GiaBan,MoTa,TrangThai) values \n"
+                + " (?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, chiTietDep.getIdDanhMuc());
-            ps.setObject(2, chiTietDep.getIdSanPham());
-            ps.setObject(3, chiTietDep.getIdSize());
-            ps.setObject(4, chiTietDep.getIdMauSac());
-            ps.setObject(5, chiTietDep.getIdChatLieu());
-            ps.setObject(6, chiTietDep.getIdNSX());
-            ps.setObject(7, chiTietDep.getIdDe());
+            ps.setObject(2, chiTietDep.getTenDanhMuc().getIdDanhMuc());
+            ps.setObject(1, chiTietDep.getTenSanPham().getIdSanPham());
+            ps.setObject(3, chiTietDep.getTenSize().getIdSize());
+            ps.setObject(4, chiTietDep.getTenMauSac().getId());
+            ps.setObject(5, chiTietDep.getTenChatLieu().getId());
+            ps.setObject(6, chiTietDep.getTenNhaSX().getId());
+            ps.setObject(7, chiTietDep.getTenDe().getIdDe());
             ps.setObject(8, chiTietDep.getSoLuong());
             ps.setObject(9, chiTietDep.getGiaBan());
             ps.setObject(10, chiTietDep.getMoTa());
-            ps.setObject(11, chiTietDep.getHinhAnh());
-            ps.setObject(12, chiTietDep.getTrangThai());
+            ps.setObject(11, chiTietDep.getTrangThai());
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean addChiTietSanPham(ChiTietSPModel chiTietDep) {
+        String sql = "insert into CHITIETDEP (IdSanPham.Ma,IdSanPham.Ten,IdDanhMuc,GiaBan,MoTa,HinhAnh,TrangThai) values \n"
+                + " (?,?,?,?,?,?,?)";
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, chiTietDep.getTenSanPham().getMa());
+            ps.setObject(2, chiTietDep.getTenSanPham().getIdSanPham());
+            ps.setObject(3, chiTietDep.getTenDanhMuc().getIdDanhMuc());
+            ps.setObject(4, chiTietDep.getGiaBan());
+            ps.setObject(5, chiTietDep.getMoTa());
+            ps.setObject(6, chiTietDep.getTrangThai());
+            ps.setObject(7, chiTietDep.getImageUrl());
             int result = ps.executeUpdate();
             return result > 0;
         } catch (Exception e) {
@@ -115,24 +134,24 @@ public class ChiTietSanPhamRepository {
         return false;
     }
 
-    public boolean updateChiTiet(ChiTietDep chiTietDep) {
-        String sql = "{CALL updateCHITIETDEP (?,?,?,?,?,?,?,?,?,?,?,?)}";
+    public boolean updateChiTiet(ChiTietSPModel chiTietDep) {
+        String sql = "update CHITIETDEP set IdDanhMuc = ? , IdSanPham = ? , IdSize = ? , IdMauSac = ?,\n"
+                + "IdChatLieu = ? , IdNSX = ? ,IdDe = ?,SoLuong = ?,GiaBan = ?,MoTa = ?,TrangThai = ? where Id = ?";
         try (Connection con = DBConnection.getConnection()) {
             CallableStatement ps = con.prepareCall(sql);
 
-            ps.setObject(1, chiTietDep.getIdDanhMuc());
-            ps.setObject(2, chiTietDep.getIdSanPham());
-            ps.setObject(3, chiTietDep.getIdSize());
-            ps.setObject(4, chiTietDep.getIdMauSac());
-            ps.setObject(5, chiTietDep.getIdChatLieu());
-            ps.setObject(6, chiTietDep.getIdNSX());
-            ps.setObject(7, chiTietDep.getIdDe());
+            ps.setObject(2, chiTietDep.getTenDanhMuc().getIdDanhMuc());
+            ps.setObject(1, chiTietDep.getTenSanPham().getIdSanPham());
+            ps.setObject(3, chiTietDep.getTenSize().getIdSize());
+            ps.setObject(4, chiTietDep.getTenMauSac().getId());
+            ps.setObject(5, chiTietDep.getTenChatLieu().getId());
+            ps.setObject(6, chiTietDep.getTenNhaSX().getId());
+            ps.setObject(7, chiTietDep.getTenDe().getIdDe());
             ps.setObject(8, chiTietDep.getSoLuong());
             ps.setObject(9, chiTietDep.getGiaBan());
             ps.setObject(10, chiTietDep.getMoTa());
-            ps.setObject(11, chiTietDep.getHinhAnh());
-            ps.setObject(12, chiTietDep.getTrangThai());
-
+            ps.setObject(11, chiTietDep.getTrangThai());
+            ps.setObject(12, chiTietDep.getId());
             int result = ps.executeUpdate();
             return result > 0;
         } catch (Exception e) {
@@ -143,10 +162,10 @@ public class ChiTietSanPhamRepository {
 
     public ArrayList<ChiTietDep> getAllHoaDonSP() {
         ArrayList<ChiTietDep> listctd = new ArrayList<>();
-       String sql = "SELECT * FROM CHITIETDEP";
-       ResultSet rs  = JDBCHelper.excuteQuery(sql);
+        String sql = "SELECT * FROM CHITIETDEP";
+        ResultSet rs = JDBCHelper.excuteQuery(sql);
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 SanPham sp = spr.getSanPhamByID(rs.getString(3));
                 DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
                 Size s = sizer.getSizeByID(rs.getString(4));
@@ -154,25 +173,343 @@ public class ChiTietSanPhamRepository {
                 ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
                 NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
                 De d = der.getDeByID(rs.getString(8));
-                listctd.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12),rs.getString(13), rs.getInt(14)));
-                
+                listctd.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  listctd;
+        return listctd;
+    }
+
+    public ArrayList<ChiTietDep> getAllSanPham() {
+        ArrayList<ChiTietDep> listctd = new ArrayList<>();
+        String sql = "SELECT * FROM CHITIETDEP";
+        ResultSet rs = JDBCHelper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                listctd.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listctd;
+    }
+
+    public ArrayList<ChiTietDep> getCTSPbyChatLieu(String chatLieu) {
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , CHATLIEU.Ten "
+                + "from CHITIETDEP as join CHATLIEU.Id = a.CHATLIEU "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + chatLieu + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
     public ArrayList<ChiTietDep> getCTSPbyMauSac(String mauSac) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , MAUSAC.Ten "
+                + "from CHITIETDEP as join MAUSAC.Id = a.MAUSAC "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + mauSac + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
     public ArrayList<ChiTietDep> getCTSPbySIZE(String size) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , SIZE.Ten "
+                + "from CHITIETDEP as join SIZE.Id = a.SIZE "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + size + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
-    public ArrayList<ChiTietDep> getCTSPbyNSX(String nsx) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<ChiTietDep> getCTSPbyNSX(String nsx1) {
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , NSX.Ten "
+                + "from CHITIETDEP as join NSX.Id = a.NSX "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + nsx1 + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
+    public ArrayList<ChiTietDep> getCTSPbyDe(String de) {
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , DE.Ten "
+                + "from CHITIETDEP as join DE.Id = a.DE "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + de + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+//    public ArrayList<ChiTietDep> getCTSPbySanPham(String sp) {
+//        ArrayList<ChiTietDep> list = new ArrayList<>();
+//        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , SANPHAM.Ten "
+//                + "from CHITIETDEP as join SANPHAM.Id = a.SANPHAM "
+//                + "where Ten like ?";
+//        try {
+//            Connection c = DBConnection.getConnection();
+//            PreparedStatement ps = c.prepareStatement(sql);
+//
+//            ps.setString(1, "%" + sp + "%");
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                SanPham sp = spr.getSanPhamByID(rs.getString(3));
+//                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+//                Size s = sizer.getSizeByID(rs.getString(4));
+//                MauSac ms = msr.getMauSacID(rs.getString(5));
+//                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+//                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+//                De d = der.getDeByID(rs.getString(8));
+//                list.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+//
+//            }
+//            c.close();
+//            ps.close();
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//
+//    }
+    public List<String> getDanhMuc() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from DANHMUC where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("Ten"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getSanPham() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from SANPHAM where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("Ten"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getChatLieu() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from CHATLIEU where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("Ten"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getMauSac() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from MAUSAC where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("MauSac"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getSize() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from SIZE where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("KichCo"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getNSX() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from NSX where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("Ten"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> getDe() {
+        List<String> lstDanhMuc = new ArrayList<>();
+        String sql = "select * from DE where TrangThai = 1";
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lstDanhMuc.add(rs.getString("Ten"));
+            }
+            return lstDanhMuc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

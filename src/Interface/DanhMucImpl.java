@@ -14,13 +14,11 @@ import java.util.ArrayList;
 public interface DanhMucImpl {
     public ArrayList<DanhMuc> getAllDanhMucRepository();
     
-    public String insert(DanhMuc cl);
+    public String insert(DanhMuc dm);
     
-    public String update(DanhMuc cl);
+    public String update(String Ma,DanhMuc dm);
     
-    public String delete(String id);
-    
-    public String getIDByName(String danhMuc);
+    public DanhMuc getIDByName(String danhMuc);
     
     public void updateTrangThai(String idDanhMuc);
 }

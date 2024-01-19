@@ -17,11 +17,9 @@ public interface MauSacImpl {
     
     public String insert(MauSac ms);
     
-    public String update(MauSac ms);
+    public String update(String Ma,MauSac ms);
     
-    public String delete(String ms);
-    
-    public String getIDByName(String mauSac);
+    public MauSac getIDByName(String mauSac);
     
     public void updateTrangThai(String idMauSac);
 }

@@ -4,12 +4,15 @@
  */
 package View;
 
+import DomainModels.NhaSanXuat;
+import Service.NsxService;
 import Utilities.DBConnection;
 import ViewModel.NsxModel;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.sql.*;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ADMIN
@@ -19,6 +22,7 @@ public class Form_NSX extends javax.swing.JFrame {
     /**
      * Creates new form Form_NSX
      */
+    NsxService nsxService = new NsxService();
     NsxModel nm;
     long count , soTrang , trang = 1;
     Connection cn;
@@ -30,10 +34,10 @@ public class Form_NSX extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         titleTable();
         countDB();
-        if (count % 10 == 0) {
-            soTrang = count / 10;
+        if (count % 5 == 0) {
+            soTrang = count / 5;
         } else {
-            soTrang = count / 10 + 1;
+            soTrang = count / 5 + 1;
         }
         loadData(1);
         lbSoTrang.setText("1/" + soTrang);
@@ -68,7 +72,7 @@ public class Form_NSX extends javax.swing.JFrame {
         titleTable();
         nm.getDataVector().removeAllElements();
         try {
-            String query = "Select top 10 * from NSX where Ten not in (Select top " + (trang * 10 - 10) + " Ten from NSX)";
+            String query = "Select top 5 * from NSX where Ten not in (Select top " + (trang * 5 - 5) + " Ten from NSX)";
             cn = DBConnection.getConnection();
             st = cn.createStatement();
             rs = st.executeQuery(query);
@@ -100,19 +104,20 @@ public class Form_NSX extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        txtTenNsx = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnCapNhat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
         btLonMax = new javax.swing.JButton();
         btNhoMax = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        txtMaNSX = new javax.swing.JTextField();
         btNho = new javax.swing.JButton();
         btLon = new javax.swing.JButton();
         lbTrang = new javax.swing.JLabel();
         lbSoTrang = new javax.swing.JLabel();
         lbClose = new javax.swing.JLabel();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,13 +127,23 @@ public class Form_NSX extends javax.swing.JFrame {
 
         jLabel18.setText("Tên NSX");
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Them.png"))); // NOI18N
-        jButton8.setText("Thêm");
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Them.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Sua.png"))); // NOI18N
-        jButton9.setText("Cập Nhật");
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Sua.png"))); // NOI18N
+        btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,6 +153,11 @@ public class Form_NSX extends javax.swing.JFrame {
                 "Mã Chất Liệu", "Tên Chất liệu"
             }
         ));
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDanhSach);
 
         btLonMax.setText(">>");
@@ -179,6 +199,15 @@ public class Form_NSX extends javax.swing.JFrame {
             }
         });
 
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-clear-16.png"))); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -186,26 +215,32 @@ public class Form_NSX extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(lbClose)
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton9)))
+                        .addGap(77, 77, 77)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnCapNhat)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnReset)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(91, 91, 91)))
-                .addContainerGap())
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(86, 86, 86)
+                                        .addComponent(jLabel18)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtTenNsx, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addComponent(lbClose)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jLabel17)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtMaNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(btNhoMax)
@@ -219,7 +254,7 @@ public class Form_NSX extends javax.swing.JFrame {
                 .addComponent(btLonMax)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbSoTrang)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,20 +262,21 @@ public class Form_NSX extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMaNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel17)))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18)
+                    .addComponent(txtTenNsx, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -304,57 +340,107 @@ public class Form_NSX extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbCloseMouseClicked
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtMaNSX.setText("");
+        txtTenNsx.setText("");
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        int index = tblDanhSach.getSelectedRow();
+        
+        String ma = (String) tblDanhSach.getValueAt(index, 0);
+        String ten = (String) tblDanhSach.getValueAt(index, 1);
+        
+        txtMaNSX.setText(ma);
+        txtTenNsx.setText(ten);
+    }//GEN-LAST:event_tblDanhSachMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if (txtMaNSX.getText().trim().equals("") || txtTenNsx.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Moi ban nhap day du thong tin.");
+            return;
+        }
+        try {
+            String ma = txtMaNSX.getText();
+            String ten = txtTenNsx.getText();
+            NhaSanXuat danhMuc = new NhaSanXuat(0, ma, ten, WIDTH);
+            nsxService.update(ma, danhMuc);
+            loadData(trang);
+            JOptionPane.showMessageDialog(this, "Add thanh cong.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Add that bai.");
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        if (txtMaNSX.getText().trim().equals("") || txtTenNsx.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Moi ban chon ban ghi.");
+            return;
+        }
+        try {
+            String ma = txtMaNSX.getText();
+            String ten = txtTenNsx.getText();
+            NhaSanXuat danhMuc = new NhaSanXuat(0, ma, ten, WIDTH);
+            nsxService.update(ma, danhMuc);
+            loadData(trang);
+            JOptionPane.showMessageDialog(this, "Cap nhat thanh cong.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cap nhat that bai.");
+        }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Form_NSX().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Form_NSX.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Form_NSX().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLon;
     private javax.swing.JButton btLonMax;
     private javax.swing.JButton btNho;
     private javax.swing.JButton btNhoMax;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnThem;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbClose;
     private javax.swing.JLabel lbSoTrang;
     private javax.swing.JLabel lbTrang;
     private javax.swing.JTable tblDanhSach;
+    private javax.swing.JTextField txtMaNSX;
+    private javax.swing.JTextField txtTenNsx;
     // End of variables declaration//GEN-END:variables
 }

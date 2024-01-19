@@ -9,25 +9,19 @@ package DomainModels;
  * @author ADMIN
  */
 public class ChatLieu {
-    
+
     private Integer id;
-    
+
     private String ma;
-    
+
     private String ten;
-    
+
     private Integer trangThai;
 
     public ChatLieu() {
     }
 
-    public ChatLieu(Integer id, String ma, String ten) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-    }
-    
-    
+
     public ChatLieu(Integer id, String ma, String ten, Integer trangThai) {
         this.id = id;
         this.ma = ma;
@@ -69,8 +63,6 @@ public class ChatLieu {
 
     @Override
     public String toString() {
-        return ten;
+        return "ChatLieu{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", trangThai=" + trangThai + '}';
     }
-    
-    
 }
