@@ -6,7 +6,14 @@ package Service;
 
 import DomainModels.ChiTietDep;
 import Interface.ChiTietSanPhamImpl;
+import Repository.ChatLieuRepository;
 import Repository.ChiTietSanPhamRepository;
+import Repository.DanhMucRepository;
+import Repository.DeRepository;
+import Repository.MauSacRepository;
+import Repository.NsxRepository;
+import Repository.SanPhamRepository;
+import Repository.SizeRepository;
 import ViewModel.ChiTietSPModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,27 +35,36 @@ public class ChiTietSanPhamService {
             return null;
         }
     }
-    
-    public String insertChiTiet(ChiTietSPModel ctd){
+
+    public ArrayList<ChiTietDep> fillChiTiet(String danhMuc) {
+        try {
+            return chiTietSanPhamRepository.fillChiTiet(danhMuc);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String insertChiTiet(ChiTietSPModel ctd) {
         if (chiTietSanPhamRepository.addChiTiet(ctd)) {
             return "Them Thanh Cong";
-        }else{
+        } else {
             return "Them That Bai";
         }
     }
-    
-    public String insertChiTietSanPham(ChiTietSPModel ctd){
+
+    public String insertChiTietSanPham(ChiTietSPModel ctd) {
         if (chiTietSanPhamRepository.addChiTietSanPham(ctd)) {
             return "Them Thanh Cong";
-        }else{
+        } else {
             return "Them That Bai";
         }
     }
-    
-    public String updateChiTiet(ChiTietSPModel ctd){
+
+    public String updateChiTiet(ChiTietSPModel ctd) {
         if (chiTietSanPhamRepository.updateChiTiet(ctd)) {
             return "Sua Thanh Cong";
-        }else{
+        } else {
             return "Sua That Bai";
         }
     }
@@ -56,7 +72,7 @@ public class ChiTietSanPhamService {
     public List<ChiTietDep> getAllHdSp() {
         return this.chiTietSanPhamRepository.getAllHoaDonSP();
     }
-    
+
     public List<ChiTietDep> getAllSanPham() {
         return this.chiTietSanPhamRepository.getAllSanPham();
     }
@@ -81,6 +97,10 @@ public class ChiTietSanPhamService {
         return chiTietSanPhamRepository.getCTSPbyChatLieu(chatLieu);
     }
 
+    public String getIDDanhMuc(String tenDanhMuc) {
+        return chiTietSanPhamRepository.getIDDanhMuc(tenDanhMuc);
+    }
+    
     public List<String> getDanhMuc() {
         return chiTietSanPhamRepository.getDanhMuc();
     }

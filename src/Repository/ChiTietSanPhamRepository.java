@@ -19,6 +19,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -56,6 +58,82 @@ public class ChiTietSanPhamRepository {
         }
         return listctd;
     }
+    
+    public ArrayList<ChiTietDep> fillChiTiet(String danhMuc) {
+    String sql = "SELECT * FROM CHITIETDEP WHERE";
+    ArrayList<ChiTietDep> chiTietDeps = new ArrayList<>();
+
+    try {
+        StringBuilder queryBuilder = new StringBuilder(sql);
+
+        if (danhMuc != null && !danhMuc.isEmpty()) {
+            queryBuilder.append(" IdDanhMuc = ? ");
+        }
+//        if (sanPham != null && !sanPham.isEmpty()) {
+//            queryBuilder.append(" AND IdSanPham = ? ");
+//        }
+//        if (size != null && !size.isEmpty()) {
+//            queryBuilder.append(" AND IdSize = ? ");
+//        }
+//        if (mauSac != null && !mauSac.isEmpty()) {
+//            queryBuilder.append(" AND IdMauSac = ? ");
+//        }
+//        if (chatLieu != null && !chatLieu.isEmpty()) {
+//            queryBuilder.append(" AND IdChatLieu = ? ");
+//        }
+//        if (nsx != null && !nsx.isEmpty()) {
+//            queryBuilder.append(" AND IdNSX = ? ");
+//        }
+//        if (de != null && !de.isEmpty()) {
+//            queryBuilder.append(" AND IdDe = ? ");
+//        }
+
+        try (PreparedStatement pstmt = dBConnection.getConnection().prepareStatement(queryBuilder.toString())) {
+            int parameterIndex = 1;
+            if (danhMuc != null && !danhMuc.isEmpty()) {
+                pstmt.setString(parameterIndex++, danhMuc);
+            }
+//            if (sanPham != null && !sanPham.isEmpty()) {
+//                pstmt.setString(parameterIndex++, sanPham);
+//            }
+//            if (size != null && !size.isEmpty()) {
+//                pstmt.setString(parameterIndex++, size);
+//            }
+//            if (mauSac != null && !mauSac.isEmpty()) {
+//                pstmt.setString(parameterIndex++, mauSac);
+//            }
+//            if (chatLieu != null && !chatLieu.isEmpty()) {
+//                pstmt.setString(parameterIndex++, chatLieu);
+//            }
+//            if (nsx != null && !nsx.isEmpty()) {
+//                pstmt.setString(parameterIndex++, nsx);
+//            }
+//            if (de != null && !de.isEmpty()) {
+//                pstmt.setString(parameterIndex++, de);
+//            }
+
+            // Execute the query and process the result set
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {                
+                SanPham sp = spr.getSanPhamByID(rs.getString(2));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(3));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat n = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                chiTietDeps.add(new ChiTietDep(rs.getInt(1), sp, dm, s, ms, cl, n, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+                
+            }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return chiTietDeps;
+}
+
+
 
     public ArrayList<ChiTietDep> getCTSPbyDanhMuc(String danhMuc) {
         ArrayList<ChiTietDep> list = new ArrayList<>();
@@ -116,16 +194,15 @@ public class ChiTietSanPhamRepository {
     }
     
     public boolean addChiTietSanPham(ChiTietSPModel chiTietDep) {
-        String sql = "insert into CHITIETDEP (IdSanPham.Ma,IdSanPham.Ten,IdDanhMuc,GiaBan,MoTa,HinhAnh,TrangThai) values \n"
-                + " (?,?,?,?,?,?,?)";
+        String sql = "insert into CHITIETDEP (IdSanPham,IdDanhMuc,GiaBan,MoTa,HinhAnh,TrangThai) values \n"
+                + " (?,?,?,?,?,?)";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, chiTietDep.getTenSanPham().getMa());
-            ps.setObject(2, chiTietDep.getTenSanPham().getIdSanPham());
-            ps.setObject(3, chiTietDep.getTenDanhMuc().getIdDanhMuc());
-            ps.setObject(4, chiTietDep.getGiaBan());
-            ps.setObject(5, chiTietDep.getMoTa());
-            ps.setObject(6, chiTietDep.getTrangThai());
-            ps.setObject(7, chiTietDep.getImageUrl());
+            ps.setObject(1, chiTietDep.getTenSanPham().getIdSanPham());
+            ps.setObject(2, chiTietDep.getTenDanhMuc().getIdDanhMuc());
+            ps.setObject(3, chiTietDep.getGiaBan());
+            ps.setObject(4, chiTietDep.getMoTa());
+            ps.setObject(5, chiTietDep.getTrangThai());
+            ps.setObject(6, chiTietDep.getImageUrl());
             int result = ps.executeUpdate();
             return result > 0;
         } catch (Exception e) {
@@ -369,38 +446,54 @@ public class ChiTietSanPhamRepository {
 
     }
 
-//    public ArrayList<ChiTietDep> getCTSPbySanPham(String sp) {
-//        ArrayList<ChiTietDep> list = new ArrayList<>();
-//        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , SANPHAM.Ten "
-//                + "from CHITIETDEP as join SANPHAM.Id = a.SANPHAM "
-//                + "where Ten like ?";
-//        try {
-//            Connection c = DBConnection.getConnection();
-//            PreparedStatement ps = c.prepareStatement(sql);
-//
-//            ps.setString(1, "%" + sp + "%");
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                SanPham sp = spr.getSanPhamByID(rs.getString(3));
-//                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
-//                Size s = sizer.getSizeByID(rs.getString(4));
-//                MauSac ms = msr.getMauSacID(rs.getString(5));
-//                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
-//                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
-//                De d = der.getDeByID(rs.getString(8));
-//                list.add(new ChiTietDep(rs.getInt(1), dm, sp, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
-//
-//            }
-//            c.close();
-//            ps.close();
-//            return list;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//
-//    }
+    public ArrayList<ChiTietDep> getCTSPbySanPham(String sp) {
+        ArrayList<ChiTietDep> list = new ArrayList<>();
+        String sql = "SELECT a.Id, a.IdSanPham, a.SoLuong, a.GiaBan, a.IdDanhMuc, a.IdChatLieu, a.Size,a.IdHang,a.IdDe , SANPHAM.Ten "
+                + "from CHITIETDEP as join SANPHAM.Id = a.SANPHAM "
+                + "where Ten like ?";
+        try {
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);
+
+            ps.setString(1, "%" + sp + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp1 = spr.getSanPhamByID(rs.getString(3));
+                DanhMuc dm = dmr.getDanhMucByID(rs.getString(2));
+                Size s = sizer.getSizeByID(rs.getString(4));
+                MauSac ms = msr.getMauSacID(rs.getString(5));
+                ChatLieu cl = clr.getChatLieuByID(rs.getString(6));
+                NhaSanXuat nsx = nsxr.getNSXByID(rs.getString(7));
+                De d = der.getDeByID(rs.getString(8));
+                list.add(new ChiTietDep(rs.getInt(1), sp1, dm, s, ms, cl, nsx, d, rs.getInt(9), rs.getFloat(10), rs.getFloat(11), rs.getString(12), rs.getString(13), rs.getInt(14)));
+
+            }
+            c.close();
+            ps.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    public String getIDDanhMuc(String tenDanhMuc) {
+        String sql = "SELECT Id from DANHMUC WHERE Ten = ?";
+        String idDanhMuc = "";
+        try (Connection conn = DBConnection.getConnection(); 
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, tenDanhMuc);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idDanhMuc = rs.getString("Id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return idDanhMuc;
+    }
+    
     public List<String> getDanhMuc() {
         List<String> lstDanhMuc = new ArrayList<>();
         String sql = "select * from DANHMUC where TrangThai = 1";
@@ -511,5 +604,117 @@ public class ChiTietSanPhamRepository {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public String getDanhMucByID(String id) {
+
+        String sql = "SELECT Ten FROM DANHMUC WHERE Id=?";
+        String tenDanhMuc = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tenDanhMuc = rs.getString("Ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tenDanhMuc;
+    }
+    
+    public String getSanPhamByID(String id) {
+
+        String sql = "SELECT Ten FROM SANPHAM WHERE Id=?";
+        String tenSanPham = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tenSanPham = rs.getString("Ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tenSanPham;
+    }
+    
+    public String getSizeByID(String id) {
+
+        String sql = "SELECT KichCo FROM SIZE WHERE Id=?";
+        String kichCo = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                kichCo = rs.getString("KichCo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kichCo;
+    }
+    
+    public String getMauSacID(String id) {
+
+        String sql = "SELECT MauSac FROM MAUSAC WHERE Id=?";
+        String mauSac = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mauSac = rs.getString("MauSac");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mauSac;
+    }
+    
+    public String getChatLieuByID(String id) {
+
+        String sql = "SELECT Ten FROM ChatLieu WHERE Id=?";
+        String tenChatLieu = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tenChatLieu = rs.getString("Ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tenChatLieu;
+    }
+    
+    public String getDeByID(String id) {
+
+        String sql = "SELECT Ten FROM DE WHERE Id=?";
+        String tenDe = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tenDe = rs.getString("Ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tenDe;
+    }
+    
+    public String getNSXByID(String id) {
+
+        String sql = "SELECT Ten FROM NSX WHERE Id=?";
+        String tenNsx = "";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tenNsx = rs.getString("Ten");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tenNsx;
     }
 }

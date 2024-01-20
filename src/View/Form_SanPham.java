@@ -26,6 +26,7 @@ import java.awt.Image;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -444,6 +445,11 @@ public class Form_SanPham extends javax.swing.JPanel {
         btnLoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Untitled-1.png"))); // NOI18N
         btnLoc.setText("Lọc");
+        btnLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -583,7 +589,6 @@ public class Form_SanPham extends javax.swing.JPanel {
         }
         
         ChiTietSPModel chiTietSPModel = new ChiTietSPModel();
-        chiTietSPModel.setTenSanPham(FillMaSanPham(txtMaSanPham.getText()));
         chiTietSPModel.setTenSanPham(FillTenSanPham(txtTenSanPham.getText()));
         chiTietSPModel.setTenDanhMuc(FillTenDanhMuc((String) cboDanhMuc.getSelectedItem()));        
         chiTietSPModel.setGiaBan(Float.parseFloat(txtGia.getText()));
@@ -677,7 +682,9 @@ public class Form_SanPham extends javax.swing.JPanel {
                 excelFWorkbook = new XSSFWorkbook(excelBufferedInputStream);
                 XSSFSheet excelSheet = excelFWorkbook.getSheetAt(0);
                 for (int row = 1; row < excelSheet.getLastRowNum()+1; row++) {
-                    
+                    XSSFRow excelRow = excelSheet.getRow(row);
+                    ChiTietSPModel chiTietSPModel = new ChiTietSPModel();
+//                    chiTietSPModel.setTenSanPham(excelRow.getCell(1).toString());
                 }
             } catch (Exception e) {
             }
@@ -687,7 +694,7 @@ public class Form_SanPham extends javax.swing.JPanel {
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         int selected = -1;
         if (checkRongTxtArea(txtMoTa) == false || checkRongTxt(txtGia) == false || 
-                checkRongTxt(txtMaSanPham) == false || checkRongTxt(txtTenSanPham) == false) {
+                 checkRongTxt(txtTenSanPham) == false) {
             JOptionPane.showMessageDialog(this, "Vui long chon ban ghi de cap nhat.");
         } else if (checkPhaiLaSo(txtGia) == false) {
             JOptionPane.showMessageDialog(this, "Mot so thong tin phai la so.");
@@ -696,7 +703,6 @@ public class Form_SanPham extends javax.swing.JPanel {
         }
         
         ChiTietSPModel chiTietSPModel = new ChiTietSPModel();
-        chiTietSPModel.setTenSanPham(FillMaSanPham(txtMaSanPham.getText()));
         chiTietSPModel.setTenSanPham(FillTenSanPham(txtTenSanPham.getText()));
         chiTietSPModel.setTenDanhMuc(FillTenDanhMuc((String) cboDanhMuc.getSelectedItem()));        
         chiTietSPModel.setGiaBan(Float.parseFloat(txtGia.getText()));
@@ -707,12 +713,22 @@ public class Form_SanPham extends javax.swing.JPanel {
             chiTietSPModel.setTrangThai(0);
         }
         chiTietSPModel.setImageUrl(imageUrl);
-        JOptionPane.showMessageDialog(this, chiTietSanPhamService.insertChiTiet(chiTietSPModel));
+        JOptionPane.showMessageDialog(this, chiTietSanPhamService.insertChiTietSanPham(chiTietSPModel));
         listSanPham = chiTietSanPhamService.getAll();
         fillTableSanPham();
         showImage(imageUrl);
         clearFrom();
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        String chiTietDeps = chiTietSanPhamService.getIDDanhMuc(cboLocDanhMuc.getSelectedItem() + "");
+        if (chiTietDeps.isEmpty()) {
+            model.setRowCount(0);
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+            return;
+        }
+        fillTableSanPham();
+    }//GEN-LAST:event_btnLocActionPerformed
 
     public void clearFrom() {
         txtMaSanPham.setText("");
